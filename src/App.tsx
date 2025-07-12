@@ -18,6 +18,7 @@ import Favorites from "./pages/Favorites";
 import Saved from "./pages/Saved";
 import Cart from "./pages/Cart";
 import Profile from "./pages/Profile";
+import Support from "./pages/support";
 import { AppProvider } from "./contexts/AppContext";
 
 const queryClient = new QueryClient();
@@ -42,6 +43,7 @@ const App = () => {
                 <Layout>
                   <Routes>
                     <Route path="/" element={<Plataform />} />
+                    <Route path="/support" element={<Support />} />
                     <Route path="/search" element={<Search />} />
                     <Route path="/favorites" element={<Favorites />} />
                     <Route path="/saved" element={<Saved />} />

@@ -6,9 +6,11 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
+import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [showRedeemModal, setShowRedeemModal] = useState(false);
   const [redeemCode, setRedeemCode] = useState('');
 
@@ -182,13 +184,43 @@ const Cart = () => {
               />
             </div>
           </div>
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setShowRedeemModal(false)}>
-              Cancelar
-            </Button>
-            <Button onClick={handleRedeemCode}>
-              Resgatar
-            </Button>
+          <DialogFooter className="flex items-center justify-between gap-2">
+            <div className="flex gap-2">
+              <Button variant="outline" onClick={() => setShowRedeemModal(false)}>
+                Cancelar
+              </Button>
+              <Button onClick={handleRedeemCode}>
+                Resgatar
+              </Button>
+            </div>
+            <div className="relative group">
+              <a
+                onClick={() => navigate('/plataform/support')}
+                className="flex items-center justify-center p-2 rounded-full hover:bg-muted transition-colors cursor-pointer"
+                aria-label="Ir para o suporte"
+              >
+                {/* Help icon */}
+                <svg
+                  className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  viewBox="0 0 24 24"
+                >
+                  <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" fill="none" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 16h.01M12 8a3 3 0 0 1 3 3c0 1.5-1.5 2-2.25 2.5S12 14 12 14"
+                  />
+                </svg>
+              </a>
+              <div className="absolute right-0 top-10 z-10 hidden group-hover:flex">
+                <div className="bg-muted text-xs text-muted-foreground px-3 py-2 rounded shadow-lg whitespace-nowrap">
+                  Clique para ir ao suporte
+                </div>
+              </div>
+            </div>
           </DialogFooter>
         </DialogContent>
       </Dialog>
