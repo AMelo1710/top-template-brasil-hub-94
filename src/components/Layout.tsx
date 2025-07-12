@@ -60,7 +60,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <div className="min-h-screen bg-background font-poppins">
       {/* Header */}
-      <header className="flex justify-between items-center p-4 bg-card shadow-card">
+      <header className="flex justify-between items-center p-4 bg-[rgb(199, 231, 249)] shadow-card">
         <h1 className="text-xl font-bold text-primary">Top Templates Brasil</h1>
         <div className="flex items-center space-x-3">
           <Button size="icon" variant="outline" className="rounded-full hover:scale-110 transition-all duration-200">
@@ -78,7 +78,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       </main>
 
       {/* Bottom Navigation */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-card shadow-lg rounded-t-2xl border-t">
+      <nav className="fixed bottom-0 left-0 right-0 bg-card shadow-lg rounded-t-2xl border-t-2 border-t-[rgb(199, 231, 249)]">
         <div className="flex justify-around py-3 px-2">
           {navItems.map((item) => {
             const Icon = item.icon;

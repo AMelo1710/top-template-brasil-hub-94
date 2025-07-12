@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
@@ -11,15 +10,7 @@ const About = () => {
   return (
     <div className="min-h-screen flex flex-col bg-background font-poppins">
       {/* Header */}
-      <header className="flex items-center bg-card p-4 justify-between max-w-4xl mx-auto w-full">
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => navigate('/landing')}
-          className="text-primary hover:text-secondary"
-        >
-          <ArrowLeft className="w-6 h-6" />
-        </Button>
+      <header className="flex items-center bg-[rgb(199, 231, 249)] p-4 justify-between max-w-4xl mx-auto w-full">
         <h1 className="text-primary text-lg md:text-xl lg:text-2xl font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-12">
           Sobre o Top Templates Brasil
         </h1>
@@ -74,7 +65,7 @@ const About = () => {
                 <div className="bg-muted rounded-lg p-6 mt-8">
                   <h3 className="font-bold text-primary mb-4">✨ O que nos torna únicos:</h3>
                   <ul className="space-y-2 text-muted-foreground">
-                    <li>• Templates exclusivos criados por designers profissionais</li>
+                    <li>• Templates exclusivos criados por designers profissionais e que podem ser editados com facilidade</li>
                     <li>• Suporte personalizado em português</li>
                     <li>• Atualizações constantes com as últimas tendências</li>
                     <li>• Compatibilidade com as principais plataformas de apresentação</li>
@@ -87,7 +78,7 @@ const About = () => {
 
         <div className="mt-8 text-center">
           <Button
-            onClick={() => navigate('/landing')}
+            onClick={() => navigate('/')}
             className="bg-secondary hover:bg-primary text-white font-bold px-8 py-3 rounded-lg transition-colors"
           >
             Voltar para a Home
@@ -95,7 +86,7 @@ const About = () => {
         </div>
       </main>
 
-      <footer className="text-center text-muted-foreground py-6 text-sm bg-muted">
+      <footer className="text-center text-muted-foreground py-6 text-sm bg-[rgb(199, 231, 249)]">
         © 2025 Top Templates Brasil
       </footer>
     </div>

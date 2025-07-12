@@ -112,7 +112,7 @@ const Cart = () => {
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold text-primary flex items-center">
           <ShoppingCart className="w-6 h-6 mr-2 text-blue-500" />
-          Meu Carrinho
+          Nossa Loja
         </h1>
         <span className="text-muted-foreground">{cartProducts.length} produto(s)</span>
       </div>

@@ -470,7 +470,7 @@ const Funnel = () => {
         </div>
       )}
 
-      <div className="w-full max-w-md mx-auto mt-10 p-6 bg-card rounded-xl shadow-lg relative">
+      <div className="w-full max-w-md mx-auto mt-10 p-6 bg-[rgb(199, 231, 249)] rounded-xl shadow-lg relative">
         {/* Progress Bar */}
         <div className="bg-muted h-2 rounded-full overflow-hidden mb-8">
           <div 

@@ -90,11 +90,11 @@ const Login = () => {
       )}
 
       {/* Header */}
-      <header className="flex items-center bg-card p-4 justify-between max-w-4xl mx-auto w-full">
+      <header className="flex items-center bg-[rgb(199, 231, 249)] p-4 justify-between max-w-4xl mx-auto w-full">
         <Button variant="ghost" size="icon" onClick={() => navigate('/')} className="text-primary hover:text-secondary transition-colors">
           <ArrowLeft className="w-6 h-6" />
         </Button>
-        <h2 className="text-primary text-lg md:text-xl lg:text-2xl font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-12">
+        <h2 className="text-primary text-lg md:text-xl lg:text-2xl font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-12 bg-[rgb(199, 231, 249)]">
           Faça o Login para continuar
         </h2>
       </header>
@@ -167,7 +167,7 @@ const Login = () => {
             </Button>
           </div>
         </div>
-        <div className="h-5 bg-card"></div>
+        <div className="h-5 bg-[rgb(199, 231, 249)]"></div>
       </div>
     </div>
   );

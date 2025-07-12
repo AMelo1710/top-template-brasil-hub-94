@@ -11,15 +11,7 @@ const Terms = () => {
   return (
     <div className="min-h-screen flex flex-col bg-background font-poppins">
       {/* Header */}
-      <header className="flex items-center bg-card p-4 justify-between max-w-4xl mx-auto w-full">
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => navigate('/landing')}
-          className="text-primary hover:text-secondary"
-        >
-          <ArrowLeft className="w-6 h-6" />
-        </Button>
+      <header className="flex items-center bg-[rgb(199, 231, 249)] p-4 justify-between max-w-4xl mx-auto w-full">
         <h1 className="text-primary text-lg md:text-xl lg:text-2xl font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-12">
           Termos de Serviço
         </h1>
@@ -35,7 +27,7 @@ const Terms = () => {
             <CardTitle className="text-2xl text-primary">Termos de Serviço</CardTitle>
             <div className="flex items-center justify-center gap-2 text-muted-foreground text-sm">
               <Clock className="w-4 h-4" />
-              <span>Última atualização: 25 de Janeiro de 2025</span>
+              <span>Última atualização: 25 de Julho de 2025</span>
             </div>
           </CardHeader>
           <CardContent className="p-8">
@@ -163,7 +155,7 @@ const Terms = () => {
 
         <div className="mt-8 text-center">
           <Button
-            onClick={() => navigate('/landing')}
+            onClick={() => navigate('/')}
             className="bg-secondary hover:bg-primary text-white font-bold px-8 py-3 rounded-lg transition-colors"
           >
             Voltar para a Home
@@ -171,7 +163,7 @@ const Terms = () => {
         </div>
       </main>
 
-      <footer className="text-center text-muted-foreground py-6 text-sm bg-muted">
+      <footer className="bg-[rgb(199, 231, 249)] text-center text-muted-foreground py-6 text-sm">
         © 2025 Top Templates Brasil
       </footer>
     </div>

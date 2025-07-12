@@ -100,15 +100,7 @@ const Contact = () => {
       )}
 
       {/* Header */}
-      <header className="flex items-center bg-card p-4 justify-between max-w-4xl mx-auto w-full">
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => navigate('/landing')}
-          className="text-primary hover:text-secondary"
-        >
-          <ArrowLeft className="w-6 h-6" />
-        </Button>
+      <header className="flex items-center bg-[rgb(199, 231, 249)] p-4 justify-between max-w-4xl mx-auto w-full">
         <h1 className="text-primary text-lg md:text-xl lg:text-2xl font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-12">
           Fale Conosco
         </h1>
@@ -200,7 +192,7 @@ const Contact = () => {
                 <div>
                   <h3 className="font-semibold text-primary">Outras formas de contato</h3>
                   <p className="text-muted-foreground text-sm">
-                    Você também pode nos encontrar em nossas redes sociais ou enviar um email direto.
+                    Você também pode nos encontrar em nossas redes sociais ou enviar um email direto para o nosso email: <a href="mailto:contato@toptemplatesbrasil.com.br" className="text-secondary hover:underline">contato@toptemplatesbrasil.com.br</a>.
                   </p>
                 </div>
               </div>
@@ -210,7 +202,7 @@ const Contact = () => {
 
         <div className="mt-8 text-center">
           <Button
-            onClick={() => navigate('/landing')}
+            onClick={() => navigate('/')}
             variant="outline"
             className="bg-muted hover:bg-accent text-primary font-bold px-8 py-3 rounded-lg transition-colors"
           >
@@ -219,7 +211,7 @@ const Contact = () => {
         </div>
       </main>
 
-      <footer className="text-center text-muted-foreground py-6 text-sm bg-muted">
+      <footer className="text-center text-muted-foreground py-6 text-sm bg-[rgb(199, 231, 249)]">
         © 2025 Top Templates Brasil
       </footer>
     </div>

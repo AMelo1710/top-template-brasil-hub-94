@@ -184,7 +184,7 @@ const Signup = () => {
 
       <div className="flex-1 flex flex-col justify-center">
         {/* Header Section */}
-        <div className="flex items-center bg-card p-4 pb-2 justify-between max-w-4xl mx-auto w-full">
+        <div className="flex items-center bg-[rgb(199, 231, 249)] p-4 pb-2 justify-between max-w-4xl mx-auto w-full">
           <Button variant="ghost" size="icon" onClick={() => currentStep === 1 ? navigate('/') : setCurrentStep(1)} className="text-primary hover:text-secondary">
             <ArrowLeft className="w-6 h-6" />
           </Button>
@@ -331,7 +331,7 @@ const Signup = () => {
             </Button>
           </div>
         </div>
-        <div className="h-5 bg-card"></div>
+        <div className="h-5 bg-[rgb(199, 231, 249)]"></div>
       </div>
     </div>
   );
