@@ -125,7 +125,7 @@ const Signup = () => {
 
     showCustomNotification(`Conta criada com sucesso, ${userDetailsForm.fullName}!`, 'success');
     setTimeout(() => {
-      navigate('/plataform');
+      navigate('/funnel');
     }, 1000);
   };
 

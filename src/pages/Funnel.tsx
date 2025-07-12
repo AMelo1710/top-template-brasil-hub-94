@@ -96,7 +96,7 @@ const Funnel = () => {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-      navigate('/');
+      navigate('/plataform');
     }, 3500);
   };
 

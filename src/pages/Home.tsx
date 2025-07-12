@@ -110,6 +110,7 @@ const Home = () => {
 
   const handleViewTemplate = (templateId: string) => {
     // Navegar para o início e piscar o template
+    navigate('/plataform', { state: { highlightTemplateId: templateId } });
     setTimeout(() => {
       const templateElement = document.querySelector(`[data-template-id="${templateId}"]`);
       if (templateElement) {

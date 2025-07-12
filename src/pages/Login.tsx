@@ -66,7 +66,7 @@ const Login = () => {
 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [isLoginFormValid, loginForm]);
+  }, [isLoginFormValid, loginForm, handleLoginSubmit]);
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
