@@ -335,7 +335,7 @@ const Landing = () => {
           </div>
           <Button 
             onClick={() => setShowLogin(true)}
-            className="relative z-10 bg-secondary text-sky-100 hover:bg-sky-100 hover:text-secondary font-bold px-8 py-3 rounded-full transition-all duration-300 animate-pulse hover:animate-none hover:scale-105"
+            className="relative z-10 bg-secondary text-sky-100 hover:bg-sky-100 hover:text-secondary font-bold px-8 py-3 rounded-full transition-all duration-300 animate-[pulse_2s_infinite] hover:animate-none hover:scale-105"
           >
             Acessar plataforma
           </Button>
@@ -413,13 +413,13 @@ const Landing = () => {
       {/* Footer */}
       <footer className="flex flex-col gap-6 px-5 py-10 text-center bg-muted">
         <div className="flex flex-wrap items-center justify-center gap-6">
-          <Button variant="ghost" onClick={() => navigate('/about')} className="text-primary text-base font-normal leading-normal min-w-40 hover:text-secondary hover:scale-105 transition-all duration-200">
+          <Button variant="ghost" onClick={() => navigate('/about')} className="text-primary text-base font-normal leading-normal min-w-40 hover:bg-primary hover:text-muted transition-all duration-200">
             Sobre
           </Button>
-          <Button variant="ghost" onClick={() => navigate('/contact')} className="text-primary text-base font-normal leading-normal min-w-40 hover:text-secondary hover:scale-105 transition-all duration-200">
+          <Button variant="ghost" onClick={() => navigate('/contact')} className="text-primary text-base font-normal leading-normal min-w-40 hover:bg-primary hover:text-muted transition-all duration-200">
             Contato
           </Button>
-          <Button variant="ghost" onClick={() => navigate('/terms')} className="text-primary text-base font-normal leading-normal min-w-40 hover:text-secondary hover:scale-105 transition-all duration-200">
+          <Button variant="ghost" onClick={() => navigate('/terms')} className="text-primary text-base font-normal leading-normal min-w-40 hover:bg-primary hover:text-muted transition-all duration-200">
             Termos de serviço
           </Button>
         </div>

@@ -102,15 +102,19 @@ const Funnel = () => {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Enter' && currentStep < totalSteps - 1) {
+      if (e.key === 'Enter') {
         e.preventDefault();
-        nextStep();
+        if (currentStep < totalSteps - 1 && validateCurrentStep()) {
+          nextStep();
+        } else if (currentStep === totalSteps - 1) {
+          handleFinish();
+        }
       }
     };
 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [currentStep]);
+  }, [currentStep, formData]);
 
   const renderStep = () => {
     switch (currentStep) {

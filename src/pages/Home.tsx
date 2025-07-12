@@ -28,47 +28,51 @@ const Home = () => {
   const templates = [
     {
       id: '1',
-      title: 'Fones Premium',
-      description: 'Fones de alta qualidade com som premium e design moderno para uma experiência de áudio excepcional.',
-      icon: 'headphones',
+      title: 'Template Moderno',
+      description: 'Template moderno e elegante com design profissional para suas apresentações corporativas.',
+      icon: 'presentation',
       color: 'bg-purple-200',
       iconColor: 'text-purple-600',
       date: 'há 2 dias atrás',
       price: 29.90,
-      tool: 'Canva'
+      tool: 'Canva',
+      image: '/lovable-uploads/3b68387c-40d8-40f8-a7c8-3aef6a5fdb79.png'
     },
     {
       id: '2',
-      title: 'Camiseta Casual',
-      description: 'Camiseta casual confortável com design moderno e tecido de alta qualidade para o dia a dia.',
-      icon: 'shirt',
+      title: 'Currículo Criativo',
+      description: 'Currículo criativo e moderno para se destacar no mercado de trabalho.',
+      icon: 'filetext',
       color: 'bg-blue-200',
       iconColor: 'text-blue-600',
       date: 'há 1 dia atrás',
       price: 19.90,
-      tool: 'PowerPoint'
+      tool: 'PowerPoint',
+      image: '/lovable-uploads/554c6cd2-0a8e-4771-bcad-ca383c01e503.png'
     },
     {
       id: '3',
-      title: 'Smartphone X',
-      description: 'Smartphone de última geração com câmera profissional e performance excepcional para todas as suas necessidades.',
-      icon: 'smartphone',
+      title: 'Apresentação Corporativa',
+      description: 'Apresentação corporativa elegante com slides profissionais para suas reuniões de negócios.',
+      icon: 'briefcase',
       color: 'bg-indigo-200',
       iconColor: 'text-indigo-600',
       date: 'há 3 dias atrás',
       price: 39.90,
-      tool: 'Google Presentation'
+      tool: 'Google Presentation',
+      image: '/lovable-uploads/cb4a3ecf-97bf-460b-bc6f-61afbd9778ac.png'
     },
     {
       id: '4',
-      title: 'Tênis Esportivo',
-      description: 'Tênis esportivo com tecnologia avançada para máximo conforto e performance em suas atividades físicas.',
-      icon: 'footprints',
+      title: 'Infográfico Educativo',
+      description: 'Infográfico educativo com design moderno para transmitir informações de forma visual e atrativa.',
+      icon: 'chartbar',
       color: 'bg-green-200',
       iconColor: 'text-green-600',
       date: 'há 5 dias atrás',
       price: 24.90,
-      tool: 'Canva'
+      tool: 'Canva',
+      image: '/lovable-uploads/d650c6e6-9831-4d95-9f50-c2ab47949c4d.png'
     }
   ];
 
@@ -104,6 +108,20 @@ const Home = () => {
     }
   };
 
+  const handleViewTemplate = (templateId: string) => {
+    // Navegar para o início e piscar o template
+    setTimeout(() => {
+      const templateElement = document.querySelector(`[data-template-id="${templateId}"]`);
+      if (templateElement) {
+        templateElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        templateElement.classList.add('animate-pulse');
+        setTimeout(() => {
+          templateElement.classList.remove('animate-pulse');
+        }, 2000);
+      }
+    }, 100);
+  };
+
   const handleAccessWithoutAds = () => {
     setShowProModal(true);
   };
@@ -125,10 +143,10 @@ const Home = () => {
 
   const getIconName = (iconName: string) => {
     const iconMap: { [key: string]: string } = {
-      headphones: '🎧',
-      shirt: '👕',
-      smartphone: '📱',
-      footprints: '👟'
+      presentation: '📊',
+      filetext: '📄',
+      briefcase: '💼',
+      chartbar: '📈'
     };
     return iconMap[iconName] || '📄';
   };
@@ -277,8 +295,16 @@ const Home = () => {
                 <CardTitle className="text-xl text-primary">{template.title}</CardTitle>
               </CardHeader>
               
-              <div className={`h-32 ${template.color} flex items-center justify-center`}>
-                <div className="text-4xl">{getIconName(template.icon)}</div>
+              <div className={`h-32 ${template.color} flex items-center justify-center relative overflow-hidden`}>
+                {template.image ? (
+                  <img 
+                    src={template.image} 
+                    alt={template.title}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="text-4xl">{getIconName(template.icon)}</div>
+                )}
               </div>
               
               <CardContent className="p-4 space-y-4">
@@ -295,9 +321,9 @@ const Home = () => {
                   <Button 
                     variant="ghost" 
                     className="w-full text-primary"
-                    onClick={handleAccessWithoutAds}
+                    onClick={() => handleViewTemplate(template.id)}
                   >
-                    Acessar sem anúncios
+                    Ver template
                   </Button>
                 </div>
                 

@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Eye, EyeOff, CheckCircle, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -125,13 +125,30 @@ const Signup = () => {
 
     showCustomNotification(`Conta criada com sucesso, ${userDetailsForm.fullName}!`, 'success');
     setTimeout(() => {
-      navigate('/funnel');
+      navigate('/plataform');
     }, 1000);
   };
 
   const isFirstStepValid = validateEmail(formData.email) && validatePassword(formData.password);
   const isSecondStepValid = userDetailsForm.fullName.trim() && userDetailsForm.username.trim();
   const passwordChecks = getPasswordChecks(formData.password);
+
+  // Handle Enter key press
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        if (currentStep === 1 && isFirstStepValid) {
+          handleFirstStepSubmit(e as any);
+        } else if (currentStep === 2 && isSecondStepValid) {
+          handleFinalSubmit(e as any);
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [currentStep, isFirstStepValid, isSecondStepValid, formData, userDetailsForm]);
 
   if (showLoading) {
     return (
@@ -307,7 +324,7 @@ const Signup = () => {
             </Button>
             <Button
               variant="outline"
-              onClick={() => navigate('/')}
+              onClick={() => navigate('/login')}
               className="h-14 text-base font-bold w-full bg-muted text-primary hover:bg-accent"
             >
               Já tenho uma conta
