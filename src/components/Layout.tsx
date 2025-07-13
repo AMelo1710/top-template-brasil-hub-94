@@ -78,7 +78,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       </main>
 
       {/* Bottom Navigation */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-card shadow-lg rounded-t-2xl border-t-2 border-t-[rgb(199, 231, 249)]">
+      <nav className="z-50 fixed bottom-0 left-0 right-0 bg-card shadow-lg rounded-t-2xl border-t-2 border-t-[rgb(199, 231, 249)]">
         <div className="flex justify-around py-3 px-2">
           {navItems.map((item) => {
             const Icon = item.icon;
