@@ -6,7 +6,7 @@ Legenda:
 
 ## Páginas (src/pages)
 
-- [ ] Home.tsx ❌
+- [✔] Home.tsx ✔ (dividido em Notification, Header, HeroSection, BenefitsSection, FooterSection, LoginForm, ForgotPasswordForm, useHomeState)
 - [✔] Plataform.tsx ✔ (dividido em HeroSection, TemplateFilters, TemplateList, ProModal, useTemplateFilters)
 - [✔] Search.tsx ✔ (dividido em SearchBar, SearchFilters, SearchResults, useSearch)
 - [ ] Funnel.tsx ❌
@@ -32,6 +32,14 @@ Legenda:
 - [✔] Search/SearchBar.tsx ✔
 - [✔] Search/SearchFilters.tsx ✔
 - [✔] Search/SearchResults.tsx ✔
+- [✔] Home/Notification.tsx ✔
+- [✔] Home/Header.tsx ✔
+- [✔] Home/HeroSection.tsx ✔
+- [✔] Home/BenefitsSection.tsx ✔
+- [✔] Home/FooterSection.tsx ✔
+- [✔] Home/LoginForm.tsx ✔
+- [✔] Home/ForgotPasswordForm.tsx ✔
+- [✔] Home/index.ts ✔
 - [ ] Layout.tsx ❌
 - [ ] templateUtils.ts ❌
 - [ ] ui/ (componentes genéricos) ✔
@@ -40,6 +48,7 @@ Legenda:
 
 - [✔] useTemplateFilters.ts ✔
 - [✔] useSearch.ts ✔
+- [✔] useHomeState.tsx ✔
 - [ ] use-toast.ts ❌
 - [ ] use-mobile.tsx ❌
 
@@ -61,7 +70,7 @@ Legenda:
 
 - Plataform.tsx → components/Template/{HeroSection, TemplateFilters, TemplateList, ProModal, ...}, hooks/useTemplateFilters.ts
 - Search.tsx → components/Search/{SearchBar, SearchFilters, SearchResults}, hooks/useSearch.ts
-- Home.tsx → components/Home/{HeroSection, ...}
+- Home.tsx → components/Home/{Notification, Header, HeroSection, BenefitsSection, FooterSection, LoginForm, ForgotPasswordForm}, hooks/useHomeState.tsx
 - Demais páginas: dividir em componentes de domínio conforme necessário
 - Funções auxiliares → src/utils/
 - Componentes visuais genéricos → src/components/ui/
