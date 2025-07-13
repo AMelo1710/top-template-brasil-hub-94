@@ -3,7 +3,7 @@ export interface Template {
   title: string;
   description: string;
   icon: string;
-  color?: string;
+  color: string;
   date: string;
   price: number;
 }
