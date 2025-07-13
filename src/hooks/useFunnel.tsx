@@ -6,6 +6,7 @@ export const useFunnel = () => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [skippedSteps, setSkippedSteps] = useState<Set<number>>(new Set());
   const [formData, setFormData] = useState<FunnelData>({
     nome: '',
     idade: '',
@@ -50,6 +51,7 @@ export const useFunnel = () => {
     }
     
     if (currentStep === 3 && formData.pais !== 'Brasil') {
+      setSkippedSteps(prev => new Set([...prev, 4])); // Marca o step 4 como pulado
       setCurrentStep(5); // Pula o estado
     } else {
       setCurrentStep(Math.min(currentStep + 1, totalSteps - 1));
@@ -58,7 +60,14 @@ export const useFunnel = () => {
 
   const prevStep = () => {
     if (currentStep > 0) {
-      setCurrentStep(currentStep - 1);
+      let prevStep = currentStep - 1;
+      
+      // Se o step anterior foi pulado, volta para o step antes dele
+      while (skippedSteps.has(prevStep) && prevStep > 0) {
+        prevStep--;
+      }
+      
+      setCurrentStep(prevStep);
     }
   };
 
@@ -111,6 +120,7 @@ export const useFunnel = () => {
     nextStep,
     prevStep,
     handleUsoChange,
-    handleFinish
+    handleFinish,
+    skippedSteps
   };
 }; 
