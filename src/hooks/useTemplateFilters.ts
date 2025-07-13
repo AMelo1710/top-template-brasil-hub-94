@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { templates, categories, toolFilters } from '@/data/templates';
 import { useApp } from '@/contexts/AppContext';
 import { useToast } from '@/hooks/use-toast';
-import { renderCategoryTag, getPlatformBadge, renderCategoryButton, renderToolButton } from '@/components/templateUtils';
+import { renderCategoryTag, getPlatformBadge, renderCategoryButton, renderToolButton } from '@/utils/templateUtils';
 
 export default function useTemplateFilters() {
   const navigate = useNavigate();

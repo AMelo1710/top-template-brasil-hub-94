@@ -24,37 +24,55 @@ Legenda:
 
 ## Componentes (src/components)
 
+### Componentes de Domínio
+
+#### Template (src/components/Template/)
+- [✔] HeroSection.tsx ✔
+- [✔] TemplateFilters.tsx ✔
+- [✔] TemplateList.tsx ✔
+- [✔] ProModal.tsx ✔
+
+#### Search (src/components/Search/)
+- [✔] SearchBar.tsx ✔
+- [✔] SearchFilters.tsx ✔
+- [✔] SearchResults.tsx ✔
+
+#### Home (src/components/Home/)
+- [✔] Notification.tsx ✔
+- [✔] Header.tsx ✔
+- [✔] HeroSection.tsx ✔
+- [✔] BenefitsSection.tsx ✔
+- [✔] FooterSection.tsx ✔
+- [✔] LoginForm.tsx ✔
+- [✔] ForgotPasswordForm.tsx ✔
+- [✔] index.ts ✔
+
+#### Funnel (src/components/Funnel/)
+- [✔] WelcomeStep.tsx ✔
+- [✔] NameStep.tsx ✔
+- [✔] AgeStep.tsx ✔
+- [✔] CountryStep.tsx ✔
+- [✔] StateStep.tsx ✔
+- [✔] DiscoveryStep.tsx ✔
+- [✔] UsageStep.tsx ✔
+- [✔] CanvaStep.tsx ✔
+- [✔] ThankYouStep.tsx ✔
+- [✔] ProgressBar.tsx ✔
+- [✔] LoadingOverlay.tsx ✔
+- [✔] index.ts ✔
+
+#### Layout (src/components/Layout/)
+- [✔] Header.tsx ✔
+- [✔] BottomNavigation.tsx ✔
+- [✔] MoreOptionsModal.tsx ✔
+- [✔] FeedbackModal.tsx ✔
+- [✔] index.ts ✔
+
+### Componentes Genéricos
 - [✔] TemplateCard.tsx ✔
-- [✔] Template/HeroSection.tsx ✔
-- [✔] Template/TemplateFilters.tsx ✔
-- [✔] Template/TemplateList.tsx ✔
-- [✔] Template/ProModal.tsx ✔
-- [✔] Search/SearchBar.tsx ✔
-- [✔] Search/SearchFilters.tsx ✔
-- [✔] Search/SearchResults.tsx ✔
-- [✔] Home/Notification.tsx ✔
-- [✔] Home/Header.tsx ✔
-- [✔] Home/HeroSection.tsx ✔
-- [✔] Home/BenefitsSection.tsx ✔
-- [✔] Home/FooterSection.tsx ✔
-- [✔] Home/LoginForm.tsx ✔
-- [✔] Home/ForgotPasswordForm.tsx ✔
-- [✔] Home/index.ts ✔
-- [✔] Funnel/WelcomeStep.tsx ✔
-- [✔] Funnel/NameStep.tsx ✔
-- [✔] Funnel/AgeStep.tsx ✔
-- [✔] Funnel/CountryStep.tsx ✔
-- [✔] Funnel/StateStep.tsx ✔
-- [✔] Funnel/DiscoveryStep.tsx ✔
-- [✔] Funnel/UsageStep.tsx ✔
-- [✔] Funnel/CanvaStep.tsx ✔
-- [✔] Funnel/ThankYouStep.tsx ✔
-- [✔] Funnel/ProgressBar.tsx ✔
-- [✔] Funnel/LoadingOverlay.tsx ✔
-- [✔] Funnel/index.ts ✔
-- [ ] Layout.tsx ❌
-- [ ] templateUtils.ts ❌
-- [ ] ui/ (componentes genéricos) ✔
+- [✔] Layout.tsx ✔ (dividido em Header, BottomNavigation, MoreOptionsModal, FeedbackModal, useLayoutState)
+- [✔] templateUtils.ts ✔ (movido para src/utils/)
+- [✔] ui/ (componentes genéricos) ✔
 
 ## Hooks (src/hooks)
 
@@ -62,20 +80,62 @@ Legenda:
 - [✔] useSearch.ts ✔
 - [✔] useHomeState.tsx ✔
 - [✔] useFunnel.tsx ✔
-- [ ] use-toast.ts ❌
-- [ ] use-mobile.tsx ❌
+- [✔] useLayoutState.tsx ✔
+- [✔] useAppState.tsx ✔
+- [✔] use-toast.ts ✔ (documentação adicionada)
+- [✔] use-mobile.tsx ✔ (documentação adicionada)
+
+## Tipos (src/types)
+
+- [✔] funnel.ts ✔ (FunnelData, StepProps, StepComponent)
+- [✔] app.ts ✔ (Template, User, AppContextType)
 
 ## Contextos (src/contexts)
 
-- [ ] AppContext.tsx ❌
+- [✔] AppContext.tsx ✔ (refatorado com tipos separados e useAppState)
 
-## Utils (src/lib/utils.ts)
+## Utils (src/utils/)
 
+- [✔] templateUtils.ts ✔ (funções utilitárias para templates)
 - [ ] utils.ts ❌
 
 ## Dados (src/data)
 
-- [ ] templates.ts ❌
+- [✔] templates.ts ✔ (dados dos templates)
+
+---
+
+## Novos Arquivos Criados Durante a Refatoração
+
+### Componentes Extraídos:
+- **Template/**: HeroSection, TemplateFilters, TemplateList, ProModal
+- **Search/**: SearchBar, SearchFilters, SearchResults  
+- **Home/**: Notification, Header, HeroSection, BenefitsSection, FooterSection, LoginForm, ForgotPasswordForm
+- **Funnel/**: WelcomeStep, NameStep, AgeStep, CountryStep, StateStep, DiscoveryStep, UsageStep, CanvaStep, ThankYouStep, ProgressBar, LoadingOverlay
+- **Layout/**: Header, BottomNavigation, MoreOptionsModal, FeedbackModal
+
+### Hooks Criados:
+- **useTemplateFilters.ts**: Lógica de filtros de templates
+- **useSearch.ts**: Lógica de busca e filtros
+- **useHomeState.tsx**: Estado e lógica da página Home
+- **useFunnel.tsx**: Estado e lógica do funil multi-step
+- **useLayoutState.tsx**: Estado e lógica do layout (modais, feedback, logout)
+- **useAppState.tsx**: Estado global da aplicação (favoritos, salvos, carrinho, usuário)
+
+### Tipos Criados:
+- **funnel.ts**: Tipos para dados do funil e props dos steps
+- **app.ts**: Tipos para contexto da aplicação (Template, User, AppContextType)
+
+### Dados Organizados:
+- **templates.ts**: Dados centralizados dos templates
+
+### Utils Organizados:
+- **templateUtils.ts**: Funções utilitárias para renderização de templates
+
+### Arquivos de Índice:
+- **Home/index.ts**: Exportações dos componentes Home
+- **Funnel/index.ts**: Exportações dos componentes Funnel
+- **Layout/index.ts**: Exportações dos componentes Layout
 
 ---
 
@@ -85,6 +145,9 @@ Legenda:
 - Search.tsx → components/Search/{SearchBar, SearchFilters, SearchResults}, hooks/useSearch.ts
 - Home.tsx → components/Home/{Notification, Header, HeroSection, BenefitsSection, FooterSection, LoginForm, ForgotPasswordForm}, hooks/useHomeState.tsx
 - Funnel.tsx → components/Funnel/{WelcomeStep, NameStep, AgeStep, CountryStep, StateStep, DiscoveryStep, UsageStep, CanvaStep, ThankYouStep, ProgressBar, LoadingOverlay}, hooks/useFunnel.tsx
+- Layout.tsx → components/Layout/{Header, BottomNavigation, MoreOptionsModal, FeedbackModal}, hooks/useLayoutState.tsx
+- AppContext.tsx → types/app.ts, hooks/useAppState.tsx
+- templateUtils.ts → utils/templateUtils.ts
 - Demais páginas: dividir em componentes de domínio conforme necessário
 - Funções auxiliares → src/utils/
 - Componentes visuais genéricos → src/components/ui/

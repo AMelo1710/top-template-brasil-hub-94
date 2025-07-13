@@ -2,6 +2,9 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { categoryColors, toolColors } from '@/data/templates';
 
+/**
+ * Renderiza uma tag de categoria com cores específicas
+ */
 export const renderCategoryTag = (category: string) => {
   const colors = categoryColors[category as keyof typeof categoryColors];
   if (!colors) return null;
@@ -16,6 +19,9 @@ export const renderCategoryTag = (category: string) => {
   );
 };
 
+/**
+ * Renderiza um badge de plataforma com cores específicas
+ */
 export const getPlatformBadge = (platform: string) => {
   switch (platform) {
     case 'Google Presentation':
@@ -40,6 +46,9 @@ export const getPlatformBadge = (platform: string) => {
   }
 };
 
+/**
+ * Renderiza um botão de categoria com estado ativo/inativo
+ */
 export const renderCategoryButton = (category: string, isActive: boolean, onClick: () => void) => {
   const colors = categoryColors[category as keyof typeof categoryColors];
   
@@ -62,6 +71,9 @@ export const renderCategoryButton = (category: string, isActive: boolean, onClic
   }, category);
 };
 
+/**
+ * Renderiza um botão de ferramenta com estado ativo/inativo
+ */
 export const renderToolButton = (tool: string, isActive: boolean, onClick: () => void) => {
   const colors = toolColors[tool as keyof typeof toolColors];
   

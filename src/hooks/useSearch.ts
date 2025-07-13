@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { templates, categories, toolFilters } from '@/data/templates';
 import { useApp } from '@/contexts/AppContext';
-import { renderCategoryTag, getPlatformBadge, renderCategoryButton, renderToolButton } from '@/components/templateUtils';
+import { renderCategoryTag, getPlatformBadge, renderCategoryButton, renderToolButton } from '@/utils/templateUtils';
 
 export default function useSearch() {
   const { addToFavorites, removeFromFavorites, addToSaved, removeFromSaved, isFavorite, isSaved } = useApp();

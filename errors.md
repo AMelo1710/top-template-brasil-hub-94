@@ -4,7 +4,7 @@
 
 `` msg 3 - de um nome para este erro em ingles como este de exemplo "login-form-incomplete-after-signup-back-navigatio" ``
 
-# Error 1 - login-form-incomplete-after-signup-back-navigatio
+# Error 1 - login-form-incomplete-after-signup-back-navigation - **fixed**
 
 Notei um comportamento inconsistente com o botão "Esqueceu sua senha?". Abaixo estão os dois cenários que identifiquei:
 
@@ -33,7 +33,7 @@ Provavelmente trata-se de um problema de renderização causado por navegação 
 
 Se precisar, posso fornecer mais detalhes ou inspecionar o DOM/CSS quando o erro acontece. Pode verificar isso no código?
 
-# Error 2 - country-question-skipped-but-state-question-shown-on-bac
+# Error 2 - country-question-skipped-but-state-question-shown-on-back **fixed**
 
 Cenário sem erro (funcionamento esperado)
 Fluxo com país = "Brasil"
@@ -88,3 +88,5 @@ Pula a pergunta de estado (correto), vai para a próxima pergunta (ex: "Qual é 
 Ação: Clica em "Voltar"
 
 Volta para a pergunta: "De qual estado você é?" ❌ (errado, essa pergunta nunca deveria ter sido exibida)
+
+# Error 3 - 

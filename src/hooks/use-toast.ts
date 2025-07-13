@@ -24,6 +24,9 @@ const actionTypes = {
 
 let count = 0
 
+/**
+ * Gera um ID único para cada toast
+ */
 function genId() {
   count = (count + 1) % Number.MAX_SAFE_INTEGER
   return count.toString()
@@ -55,6 +58,9 @@ interface State {
 
 const toastTimeouts = new Map<string, ReturnType<typeof setTimeout>>()
 
+/**
+ * Adiciona um toast à fila de remoção
+ */
 const addToRemoveQueue = (toastId: string) => {
   if (toastTimeouts.has(toastId)) {
     return
@@ -71,6 +77,9 @@ const addToRemoveQueue = (toastId: string) => {
   toastTimeouts.set(toastId, timeout)
 }
 
+/**
+ * Reducer para gerenciar o estado dos toasts
+ */
 export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case "ADD_TOAST":
@@ -130,6 +139,9 @@ const listeners: Array<(state: State) => void> = []
 
 let memoryState: State = { toasts: [] }
 
+/**
+ * Dispara uma ação para o reducer
+ */
 function dispatch(action: Action) {
   memoryState = reducer(memoryState, action)
   listeners.forEach((listener) => {
@@ -139,6 +151,9 @@ function dispatch(action: Action) {
 
 type Toast = Omit<ToasterToast, "id">
 
+/**
+ * Função para criar um novo toast
+ */
 function toast({ ...props }: Toast) {
   const id = genId()
 
@@ -168,6 +183,10 @@ function toast({ ...props }: Toast) {
   }
 }
 
+/**
+ * Hook para gerenciar toasts
+ * @returns Estado dos toasts e funções para manipular
+ */
 function useToast() {
   const [state, setState] = React.useState<State>(memoryState)
 

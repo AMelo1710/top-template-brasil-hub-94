@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "../components/ui/button";
-import { Home, Search, AlertCircle } from "lucide-react";
+import { Home, Mail, AlertCircle } from "lucide-react";
 
 const Page404 = () => {
   return (
@@ -38,9 +38,9 @@ const Page404 = () => {
           </Button>
 
           <Button variant="outline" asChild className="w-full">
-            <Link to="/plataform/search" className="flex items-center justify-center gap-2">
-              <Search className="w-4 h-4" />
-              Procurar Templates
+            <Link to="/contact" className="flex items-center justify-center gap-2">
+              <Mail className="w-4 h-4" />
+              Entre em contato com o suporte
             </Link>
           </Button>
         </div>
