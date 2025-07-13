@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import TemplateCard from '@/components/TemplateCard';
 import { Search as SearchIcon } from 'lucide-react';
+import { getValidTemplateIds, getTemplateById } from '@/data/templates';
 
 interface SearchResultsProps {
   results: any[];
@@ -23,7 +24,19 @@ export default function SearchResults({
   renderCategoryTag,
   getPlatformBadge
 }: SearchResultsProps) {
-  if (!results.length) {
+  // Filtrar apenas os resultados que têm templates válidos
+  const validResults = useMemo(() => {
+    const validIds = getValidTemplateIds();
+    return results
+      .filter(result => validIds.includes(result.id))
+      .map(result => {
+        // Buscar o template completo do arquivo templates.ts
+        const template = getTemplateById(result.id);
+        return template || result; // Fallback para o item original se não encontrar
+      });
+  }, [results]);
+
+  if (!validResults.length) {
     return (
       <div className="text-center py-12">
         <SearchIcon className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
@@ -38,7 +51,7 @@ export default function SearchResults({
   }
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      {results.map((template, idx) => (
+      {validResults.map((template, idx) => (
         <TemplateCard
           key={template.id}
           template={template}
@@ -50,6 +63,11 @@ export default function SearchResults({
           isSaved={isSaved}
           renderCategoryTag={renderCategoryTag}
           getPlatformBadge={getPlatformBadge}
+          showActions={true}
+          showDate={true}
+          showTags={false}
+          favoriteIcon="heart"
+          savedIcon="bookmark"
         />
       ))}
     </div>

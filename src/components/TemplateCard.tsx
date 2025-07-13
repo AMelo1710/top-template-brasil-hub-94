@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Heart, Bookmark, Calendar } from 'lucide-react';
+import { Heart, Bookmark, Calendar, HeartCrack, BookmarkMinus } from 'lucide-react';
 
 interface TemplateCardProps {
   template: any;
@@ -16,6 +16,8 @@ interface TemplateCardProps {
   showActions?: boolean;
   showDate?: boolean;
   showTags?: boolean;
+  favoriteIcon?: 'heart' | 'heart-crack';
+  savedIcon?: 'bookmark' | 'bookmark-minus';
 }
 
 const TemplateCard: React.FC<TemplateCardProps> = ({
@@ -31,6 +33,8 @@ const TemplateCard: React.FC<TemplateCardProps> = ({
   showActions = true,
   showDate = true,
   showTags = false,
+  favoriteIcon = 'heart',
+  savedIcon = 'bookmark',
 }) => {
   // Imagens de exemplo (pode ser customizado via props futuramente)
   const images = [
@@ -49,6 +53,23 @@ const TemplateCard: React.FC<TemplateCardProps> = ({
     e.stopPropagation();
     setActiveIndex((prev) => (prev + 1) % cardImages.length);
   };
+
+  // Renderizar ícone de favorito baseado na prop
+  const renderFavoriteIcon = () => {
+    if (favoriteIcon === 'heart-crack') {
+      return <HeartCrack className={`w-4 h-4 ${isFavorite(template.id) ? 'fill-current' : ''}`} />;
+    }
+    return <Heart className={`w-4 h-4 ${isFavorite(template.id) ? 'fill-current' : ''}`} />;
+  };
+
+  // Renderizar ícone de salvo baseado na prop
+  const renderSavedIcon = () => {
+    if (savedIcon === 'bookmark-minus') {
+      return <BookmarkMinus className={`w-4 h-4 ${isSaved(template.id) ? 'fill-current' : ''}`} />;
+    }
+    return <Bookmark className={`w-4 h-4 ${isSaved(template.id) ? 'fill-current' : ''}`} />;
+  };
+
   return (
     <Card 
       key={template.id} 
@@ -148,7 +169,7 @@ const TemplateCard: React.FC<TemplateCardProps> = ({
                 onClick={() => handleFavoriteToggle(template)}
                 className={isFavorite(template.id) ? 'text-red-500' : 'text-muted-foreground'}
               >
-                <Heart className={`w-4 h-4 ${isFavorite(template.id) ? 'fill-current' : ''}`} />
+                {renderFavoriteIcon()}
               </Button>
               <Button
                 size="icon"
@@ -156,7 +177,7 @@ const TemplateCard: React.FC<TemplateCardProps> = ({
                 onClick={() => handleSavedToggle(template)}
                 className={isSaved(template.id) ? 'text-blue-500' : 'text-muted-foreground'}
               >
-                <Bookmark className={`w-4 h-4 ${isSaved(template.id) ? 'fill-current' : ''}`} />
+                {renderSavedIcon()}
               </Button>
             </div>
           )}

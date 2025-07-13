@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Heart, HeartCrack } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -6,13 +6,34 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { useApp } from '@/contexts/AppContext';
 import { useToast } from '@/hooks/use-toast';
 import { useNavigate } from 'react-router-dom';
+import TemplateCard from '@/components/TemplateCard';
+import { renderCategoryTag, getPlatformBadge } from '@/utils/templateUtils';
+import { getValidTemplateIds, getTemplateById } from '@/data/templates';
 
 const Favorites = () => {
-  const { favorites, removeFromFavorites } = useApp();
+  const { 
+    favorites, 
+    removeFromFavorites, 
+    addToSaved, 
+    removeFromSaved, 
+    isSaved 
+  } = useApp();
   const { toast } = useToast();
   const navigate = useNavigate();
   const [showRemoveModal, setShowRemoveModal] = useState(false);
   const [itemToRemove, setItemToRemove] = useState<any>(null);
+
+  // Filtrar apenas os favoritos que têm templates válidos
+  const validFavorites = useMemo(() => {
+    const validIds = getValidTemplateIds();
+    return favorites
+      .filter(favorite => validIds.includes(favorite.id))
+      .map(favorite => {
+        // Buscar o template completo do arquivo templates.ts
+        const template = getTemplateById(favorite.id);
+        return template || favorite; // Fallback para o item original se não encontrar
+      });
+  }, [favorites]);
 
   const handleRemove = (item: any) => {
     setItemToRemove(item);
@@ -45,7 +66,35 @@ const Favorites = () => {
     }, 100);
   };
 
-  if (favorites.length === 0) {
+  const handleFavoriteToggle = (template: any) => {
+    removeFromFavorites(template.id);
+    toast({
+      title: "Removido dos favoritos",
+      description: `${template.title} foi removido dos seus favoritos.`,
+    });
+  };
+
+  const handleSavedToggle = (template: any) => {
+    if (isSaved(template.id)) {
+      // Se já está salvo, remove dos salvos
+      removeFromSaved(template.id);
+      toast({
+        title: "Removido dos salvos",
+        description: `${template.title} foi removido dos seus salvos.`,
+      });
+    } else {
+      // Adiciona aos salvos
+      addToSaved(template);
+      toast({
+        title: "Adicionado aos salvos",
+        description: `${template.title} foi adicionado aos seus salvos.`,
+      });
+    }
+  };
+
+  const isFavorite = (id: string) => true; // Sempre true na página de favoritos
+
+  if (validFavorites.length === 0) {
     return (
       <div className="container mx-auto px-4 py-6">
         <div className="text-center py-12">
@@ -69,42 +118,28 @@ const Favorites = () => {
           <Heart className="w-6 h-6 mr-2 text-red-500" />
           Meus Favoritos
         </h1>
-        <span className="text-muted-foreground">{favorites.length} item(s)</span>
+        <span className="text-muted-foreground">{validFavorites.length} item(s)</span>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {favorites.map((template) => (
-          <Card key={template.id} className="hover:shadow-hover transition-all duration-300">
-            <CardHeader>
-              <CardTitle className="text-lg text-primary flex items-center justify-between">
-                {template.title}
-                <Button
-                  size="icon"
-                  variant="ghost"
-                  onClick={() => handleRemove(template)}
-                  className="text-red-500 hover:text-red-700"
-                >
-                  <HeartCrack className="w-4 h-4" />
-                </Button>
-              </CardTitle>
-            </CardHeader>
-
-            <div className={`h-32 ${template.color || 'bg-muted'} flex items-center justify-center relative overflow-hidden`}>
-              <div className="text-4xl">❤️</div>
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-            </div>
-
-            <CardContent className="p-4 space-y-4">
-              <p className="text-muted-foreground text-sm">{template.description}</p>
-              
-                  <Button 
-                    className="w-full"
-                    onClick={() => handleViewTemplate(template.id)}
-                  >
-                    Ver Template
-                  </Button>
-            </CardContent>
-          </Card>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {validFavorites.map((template, idx) => (
+          <TemplateCard
+            key={template.id}
+            template={template}
+            idx={idx}
+            handleFavoriteToggle={handleFavoriteToggle}
+            handleSavedToggle={handleSavedToggle}
+            handleViewTemplate={handleViewTemplate}
+            isFavorite={isFavorite}
+            isSaved={isSaved}
+            renderCategoryTag={renderCategoryTag}
+            getPlatformBadge={getPlatformBadge}
+            showActions={true}
+            showDate={true}
+            showTags={false}
+            favoriteIcon="heart-crack"
+            savedIcon="bookmark"
+          />
         ))}
       </div>
 

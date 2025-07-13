@@ -2,7 +2,7 @@
 
 export const templates = [
   {
-    id: '1',
+    id: 'template-moderno',
     title: 'Template Moderno',
     description: 'Template moderno e elegante com design profissional para suas apresentações corporativas.',
     icon: 'presentation',
@@ -16,7 +16,7 @@ export const templates = [
     tags: ['apresentação', 'moderno', 'corporativo', 'canva', 'slides']
   },
   {
-    id: '2',
+    id: 'template-curriculo-criativo',
     title: 'Currículo Criativo',
     description: 'Currículo criativo e moderno para se destacar no mercado de trabalho.',
     icon: 'filetext',
@@ -30,7 +30,7 @@ export const templates = [
     tags: ['currículo', 'criativo', 'moderno', 'powerpoint', 'trabalho']
   },
   {
-    id: '3',
+    id: 'template-apresentacao-corporativa',
     title: 'Apresentação Corporativa',
     description: 'Apresentação corporativa elegante com slides profissionais para suas reuniões de negócios.',
     icon: 'briefcase',
@@ -39,12 +39,12 @@ export const templates = [
     date: 'há 3 dias atrás',
     price: 39.90,
     tool: 'Google Presentation',
-    image: '/lovable-uploads/cb4a3ecf-97bf-460b-bc6f-61afbd9778ac.png',
+    image: '/lovable-uploads/d650c6e6-9831-4d95-9f50-c2ab47949c4d.png',
     categories: ['🔥Em alta🔥'],
     tags: ['apresentação', 'corporativa', 'negócios', 'google', 'slides']
   },
   {
-    id: '4',
+    id: 'template-infografico-educativo',
     title: 'Infográfico Educativo',
     description: 'Infográfico educativo com design moderno para transmitir informações de forma visual e atrativa.',
     icon: 'chartbar',
@@ -53,11 +53,54 @@ export const templates = [
     date: 'há 5 dias atrás',
     price: 24.90,
     tool: 'Canva',
-    image: '/lovable-uploads/d650c6e6-9831-4d95-9f50-c2ab47949c4d.png',
+    image: '/lovable-uploads/77988cbe-a964-4668-a3dd-a5eb76475705.png',
     categories: ['Posts'],
     tags: ['infográfico', 'educativo', 'visual', 'canva', 'design']
+  },
+  {
+    id: 'template-cartao-visita-elegante',
+    title: 'Cartão de Visita Elegante',
+    description: 'Cartão de visita com design elegante e profissional para impressionar seus clientes.',
+    icon: 'card',
+    color: 'bg-amber-200',
+    iconColor: 'text-amber-600',
+    date: 'há 1 semana atrás',
+    price: 15.90,
+    tool: 'Canva',
+    image: '/lovable-uploads/4d7f282c-259d-4106-abef-7a35e2e525ba.png',
+    categories: ['Cartões de Visita'],
+    tags: ['cartão', 'visita', 'elegante', 'profissional', 'canva']
+  },
+  {
+    id: 'template-post-redes-sociais',
+    title: 'Post para Redes Sociais',
+    description: 'Post criativo e atrativo para suas redes sociais com design moderno.',
+    icon: 'share',
+    color: 'bg-pink-200',
+    iconColor: 'text-pink-600',
+    date: 'há 2 semanas atrás',
+    price: 12.90,
+    tool: 'PowerPoint',
+    image: '/lovable-uploads/3b68387c-40d8-40f8-a7c8-3aef6a5fdb79.png',
+    categories: ['Redes Sociais'],
+    tags: ['post', 'redes', 'sociais', 'criativo', 'powerpoint']
   }
 ];
+
+// Função para obter os IDs válidos dos templates
+export const getValidTemplateIds = () => {
+  return templates.map(template => template.id);
+};
+
+// Função para verificar se um ID é válido
+export const isValidTemplateId = (id: string) => {
+  return templates.some(template => template.id === id);
+};
+
+// Função para obter um template por ID
+export const getTemplateById = (id: string) => {
+  return templates.find(template => template.id === id);
+};
 
 export const categories = [
   '🔥Em alta🔥', 'Currículos', 'Apresentações', 'Cartões de Visita',

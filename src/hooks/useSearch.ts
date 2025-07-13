@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { templates, categories, toolFilters } from '@/data/templates';
 import { useApp } from '@/contexts/AppContext';
 import { renderCategoryTag, getPlatformBadge, renderCategoryButton, renderToolButton } from '@/utils/templateUtils';
+import { getValidTemplateIds } from '@/data/templates';
 
 export default function useSearch() {
   const { addToFavorites, removeFromFavorites, addToSaved, removeFromSaved, isFavorite, isSaved } = useApp();
@@ -11,8 +12,14 @@ export default function useSearch() {
   const [selectedCategory, setSelectedCategory] = useState('Todos');
   const [selectedTool, setSelectedTool] = useState('Todos');
 
+  // Filtrar templates válidos primeiro
+  const validTemplates = useMemo(() => {
+    const validIds = getValidTemplateIds();
+    return templates.filter(template => validIds.includes(template.id));
+  }, []);
+
   useEffect(() => {
-    let results = templates;
+    let results = validTemplates;
     if (searchTerm) {
       results = results.filter(template => 
         template.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -27,7 +34,7 @@ export default function useSearch() {
       results = results.filter(template => template.tool === selectedTool);
     }
     setFilteredResults(results);
-  }, [searchTerm, selectedCategory, selectedTool]);
+  }, [searchTerm, selectedCategory, selectedTool, validTemplates]);
 
   const handleFavoriteToggle = (template: any) => {
     if (isFavorite(template.id)) {

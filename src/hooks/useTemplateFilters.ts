@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { templates, categories, toolFilters } from '@/data/templates';
 import { useApp } from '@/contexts/AppContext';
 import { useToast } from '@/hooks/use-toast';
 import { renderCategoryTag, getPlatformBadge, renderCategoryButton, renderToolButton } from '@/utils/templateUtils';
+import { getValidTemplateIds } from '@/data/templates';
 
 export default function useTemplateFilters() {
   const navigate = useNavigate();
@@ -33,7 +34,13 @@ export default function useTemplateFilters() {
     }
   };
 
-  const filteredTemplates = templates.filter(template => {
+  // Filtrar templates válidos primeiro
+  const validTemplates = useMemo(() => {
+    const validIds = getValidTemplateIds();
+    return templates.filter(template => validIds.includes(template.id));
+  }, []);
+
+  const filteredTemplates = validTemplates.filter(template => {
     const matchTool = toolFilter === 'Todos' || template.tool === toolFilter;
     let matchCategory = true;
     if (activeCategory === '🔥Em alta🔥') {
