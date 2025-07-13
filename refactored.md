@@ -8,7 +8,7 @@ Legenda:
 
 - [ ] Home.tsx ❌
 - [✔] Plataform.tsx ✔ (dividido em HeroSection, TemplateFilters, TemplateList, ProModal, useTemplateFilters)
-- [ ] Search.tsx ❌
+- [✔] Search.tsx ✔ (dividido em SearchBar, SearchFilters, SearchResults, useSearch)
 - [ ] Funnel.tsx ❌
 - [ ] Signup.tsx ❌
 - [ ] Login.tsx ❌
@@ -29,6 +29,9 @@ Legenda:
 - [✔] Template/TemplateFilters.tsx ✔
 - [✔] Template/TemplateList.tsx ✔
 - [✔] Template/ProModal.tsx ✔
+- [✔] Search/SearchBar.tsx ✔
+- [✔] Search/SearchFilters.tsx ✔
+- [✔] Search/SearchResults.tsx ✔
 - [ ] Layout.tsx ❌
 - [ ] templateUtils.ts ❌
 - [ ] ui/ (componentes genéricos) ✔
@@ -36,6 +39,7 @@ Legenda:
 ## Hooks (src/hooks)
 
 - [✔] useTemplateFilters.ts ✔
+- [✔] useSearch.ts ✔
 - [ ] use-toast.ts ❌
 - [ ] use-mobile.tsx ❌
 
