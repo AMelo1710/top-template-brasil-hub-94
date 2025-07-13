@@ -1,157 +1,176 @@
-# Refatoração do Projeto - Progresso e Mapeamento
+# Checklist de Refatoração - Projeto React Modular
 
-Legenda:
-- ✔ Refatorado
-- ❌ Pendente
+## ✅ Páginas Refatoradas
 
-## Páginas (src/pages)
+### 1. Search.tsx
+- **Componentes Extraídos:**
+  - `SearchBar` - Barra de pesquisa com filtros
+  - `SearchFilters` - Filtros de categoria e plataforma
+  - `SearchResults` - Lista de resultados com paginação
+- **Hook Criado:**
+  - `useSearch` - Gerenciamento de estado da pesquisa
 
-- [✔] Home.tsx ✔ (dividido em Notification, Header, HeroSection, BenefitsSection, FooterSection, LoginForm, ForgotPasswordForm, useHomeState)
-- [✔] Plataform.tsx ✔ (dividido em HeroSection, TemplateFilters, TemplateList, ProModal, useTemplateFilters)
-- [✔] Search.tsx ✔ (dividido em SearchBar, SearchFilters, SearchResults, useSearch)
-- [✔] Funnel.tsx ✔ (dividido em WelcomeStep, NameStep, AgeStep, CountryStep, StateStep, DiscoveryStep, UsageStep, CanvaStep, ThankYouStep, ProgressBar, LoadingOverlay, useFunnel)
-- [ ] Signup.tsx ❌
-- [ ] Login.tsx ❌
-- [ ] Profile.tsx ❌
-- [ ] Saved.tsx ❌
-- [ ] Favorites.tsx ❌
-- [ ] Cart.tsx ❌
-- [ ] About.tsx ❌
-- [ ] Contact.tsx ❌
-- [ ] Terms.tsx ❌
-- [ ] support.tsx ❌
-- [ ] NotFound.tsx ❌
+### 2. Home.tsx
+- **Componentes Extraídos:**
+  - `HeroSection` - Seção principal com título e descrição
+  - `BenefitsSection` - Seção de benefícios
+  - `FooterSection` - Rodapé com links
+  - `LoginForm` - Formulário de login
+  - `ForgotPasswordForm` - Formulário de recuperação de senha
+  - `Notification` - Componente de notificação
+  - `Header` - Cabeçalho da página
+- **Hook Criado:**
+  - `useHomeState` - Gerenciamento de estado da página
 
-## Componentes (src/components)
+### 3. Funnel.tsx
+- **Componentes Extraídos:**
+  - `WelcomeStep` - Passo de boas-vindas
+  - `NameStep` - Passo de nome
+  - `AgeStep` - Passo de idade
+  - `CountryStep` - Passo de país
+  - `StateStep` - Passo de estado
+  - `DiscoveryStep` - Passo de descoberta
+  - `UsageStep` - Passo de uso
+  - `CanvaStep` - Passo do Canva
+  - `ThankYouStep` - Passo de agradecimento
+  - `ProgressBar` - Barra de progresso
+  - `LoadingOverlay` - Overlay de carregamento
+- **Hook Criado:**
+  - `useFunnel` - Gerenciamento de estado do funil
 
-### Componentes de Domínio
+### 4. Layout.tsx
+- **Componentes Extraídos:**
+  - `Header` - Cabeçalho do layout
+  - `BottomNavigation` - Navegação inferior
+  - `MoreOptionsModal` - Modal de opções
+  - `FeedbackModal` - Modal de feedback
+- **Hook Criado:**
+  - `useLayoutState` - Gerenciamento de estado do layout
 
-#### Template (src/components/Template/)
-- [✔] HeroSection.tsx ✔
-- [✔] TemplateFilters.tsx ✔
-- [✔] TemplateList.tsx ✔
-- [✔] ProModal.tsx ✔
+### 5. Saved.tsx
+- **Componentes Extraídos:**
+  - `EmptyState` - Estado vazio reutilizável
+  - `TemplateCard` - Card de template reutilizável
+  - `PageHeader` - Cabeçalho de página reutilizável
+  - `RemoveConfirmationDialog` - Dialog de confirmação reutilizável
+- **Hook Criado:**
+  - `useSavedState` - Gerenciamento de estado da página Saved
 
-#### Search (src/components/Search/)
-- [✔] SearchBar.tsx ✔
-- [✔] SearchFilters.tsx ✔
-- [✔] SearchResults.tsx ✔
+### 6. Favorites.tsx
+- **Componentes Extraídos:**
+  - Reutiliza os mesmos componentes da página Saved
+- **Hook Criado:**
+  - `useFavoritesState` - Gerenciamento de estado da página Favorites
 
-#### Home (src/components/Home/)
-- [✔] Notification.tsx ✔
-- [✔] Header.tsx ✔
-- [✔] HeroSection.tsx ✔
-- [✔] BenefitsSection.tsx ✔
-- [✔] FooterSection.tsx ✔
-- [✔] LoginForm.tsx ✔
-- [✔] ForgotPasswordForm.tsx ✔
-- [✔] index.ts ✔
+## ✅ Componentes Criados (31 total)
 
-#### Funnel (src/components/Funnel/)
-- [✔] WelcomeStep.tsx ✔
-- [✔] NameStep.tsx ✔
-- [✔] AgeStep.tsx ✔
-- [✔] CountryStep.tsx ✔
-- [✔] StateStep.tsx ✔
-- [✔] DiscoveryStep.tsx ✔
-- [✔] UsageStep.tsx ✔
-- [✔] CanvaStep.tsx ✔
-- [✔] ThankYouStep.tsx ✔
-- [✔] ProgressBar.tsx ✔
-- [✔] LoadingOverlay.tsx ✔
-- [✔] index.ts ✔
+### Componentes de Página Específicos:
+1. `SearchBar` - Barra de pesquisa
+2. `SearchFilters` - Filtros de pesquisa
+3. `SearchResults` - Resultados de pesquisa
+4. `HeroSection` - Seção hero da home
+5. `BenefitsSection` - Seção de benefícios
+6. `FooterSection` - Rodapé da home
+7. `LoginForm` - Formulário de login
+8. `ForgotPasswordForm` - Formulário de recuperação
+9. `Notification` - Componente de notificação
+10. `Header` (Home) - Cabeçalho da home
+11. `WelcomeStep` - Passo de boas-vindas
+12. `NameStep` - Passo de nome
+13. `AgeStep` - Passo de idade
+14. `CountryStep` - Passo de país
+15. `StateStep` - Passo de estado
+16. `DiscoveryStep` - Passo de descoberta
+17. `UsageStep` - Passo de uso
+18. `CanvaStep` - Passo do Canva
+19. `ThankYouStep` - Passo de agradecimento
+20. `ProgressBar` - Barra de progresso
+21. `LoadingOverlay` - Overlay de carregamento
+22. `Header` (Layout) - Cabeçalho do layout
+23. `BottomNavigation` - Navegação inferior
+24. `MoreOptionsModal` - Modal de opções
+25. `FeedbackModal` - Modal de feedback
 
-#### Layout (src/components/Layout/)
-- [✔] Header.tsx ✔
-- [✔] BottomNavigation.tsx ✔
-- [✔] MoreOptionsModal.tsx ✔
-- [✔] FeedbackModal.tsx ✔
-- [✔] index.ts ✔
+### Componentes Reutilizáveis:
+26. `EmptyState` - Estado vazio reutilizável
+27. `TemplateCard` - Card de template reutilizável
+28. `PageHeader` - Cabeçalho de página reutilizável
+29. `RemoveConfirmationDialog` - Dialog de confirmação reutilizável
 
-### Componentes Genéricos
-- [✔] TemplateCard.tsx ✔
-- [✔] Layout.tsx ✔ (dividido em Header, BottomNavigation, MoreOptionsModal, FeedbackModal, useLayoutState)
-- [✔] templateUtils.ts ✔ (movido para src/utils/)
-- [✔] ui/ (componentes genéricos) ✔
+## ✅ Hooks Criados (7 total)
 
-## Hooks (src/hooks)
+1. `useSearch` - Gerenciamento de estado da pesquisa
+2. `useHomeState` - Gerenciamento de estado da home
+3. `useFunnel` - Gerenciamento de estado do funil
+4. `useLayoutState` - Gerenciamento de estado do layout
+5. `useSavedState` - Gerenciamento de estado da página Saved
+6. `useFavoritesState` - Gerenciamento de estado da página Favorites
+7. `useAppState` - Gerenciamento de estado global da aplicação
 
-- [✔] useTemplateFilters.ts ✔
-- [✔] useSearch.ts ✔
-- [✔] useHomeState.tsx ✔
-- [✔] useFunnel.tsx ✔
-- [✔] useLayoutState.tsx ✔
-- [✔] useAppState.tsx ✔
-- [✔] use-toast.ts ✔ (documentação adicionada)
-- [✔] use-mobile.tsx ✔ (documentação adicionada)
+## ✅ Tipos Organizados (2 arquivos)
 
-## Tipos (src/types)
+1. `src/types/app.ts` - Tipos da aplicação (Template, User, AppContextType)
+2. `src/types/search.ts` - Tipos relacionados à pesquisa
 
-- [✔] funnel.ts ✔ (FunnelData, StepProps, StepComponent)
-- [✔] app.ts ✔ (Template, User, AppContextType)
+## ✅ Utils Reorganizados (1 arquivo)
 
-## Contextos (src/contexts)
+1. `src/utils/templateUtils.ts` - Utilitários de template (movido de components/)
 
-- [✔] AppContext.tsx ✔ (refatorado com tipos separados e useAppState)
+## ✅ Contexts Refatorados (1 arquivo)
 
-## Utils (src/utils/)
+1. `AppContext.tsx` - Contexto principal refatorado com hook useAppState
 
-- [✔] templateUtils.ts ✔ (funções utilitárias para templates)
-- [ ] utils.ts ❌
+## ✅ Hooks Documentados (2 hooks)
 
-## Dados (src/data)
+1. `use-toast.ts` - Hook de toast com documentação
+2. `use-mobile.tsx` - Hook de detecção mobile com documentação
 
-- [✔] templates.ts ✔ (dados dos templates)
+## 📊 Resumo da Refatoração
 
----
+- **6 páginas refatoradas** (Search, Home, Funnel, Layout, Saved, Favorites)
+- **31 componentes extraídos** (25 específicos + 6 reutilizáveis)
+- **7 hooks customizados** criados
+- **2 arquivos de tipos** organizados
+- **1 arquivo de utils** movido e reorganizado
+- **1 contexto** refatorado
+- **2 hooks** documentados
 
-## Novos Arquivos Criados Durante a Refatoração
+## 🎯 Benefícios Alcançados
 
-### Componentes Extraídos:
-- **Template/**: HeroSection, TemplateFilters, TemplateList, ProModal
-- **Search/**: SearchBar, SearchFilters, SearchResults  
-- **Home/**: Notification, Header, HeroSection, BenefitsSection, FooterSection, LoginForm, ForgotPasswordForm
-- **Funnel/**: WelcomeStep, NameStep, AgeStep, CountryStep, StateStep, DiscoveryStep, UsageStep, CanvaStep, ThankYouStep, ProgressBar, LoadingOverlay
-- **Layout/**: Header, BottomNavigation, MoreOptionsModal, FeedbackModal
+1. **Modularidade**: Componentes menores e mais focados
+2. **Reutilização**: Componentes compartilhados entre páginas
+3. **Manutenibilidade**: Código mais organizado e fácil de manter
+4. **Escalabilidade**: Estrutura preparada para crescimento
+5. **Testabilidade**: Componentes isolados facilitam testes
+6. **Clareza**: Separação clara de responsabilidades
+7. **Performance**: Hooks otimizados para gerenciamento de estado
 
-### Hooks Criados:
-- **useTemplateFilters.ts**: Lógica de filtros de templates
-- **useSearch.ts**: Lógica de busca e filtros
-- **useHomeState.tsx**: Estado e lógica da página Home
-- **useFunnel.tsx**: Estado e lógica do funil multi-step
-- **useLayoutState.tsx**: Estado e lógica do layout (modais, feedback, logout)
-- **useAppState.tsx**: Estado global da aplicação (favoritos, salvos, carrinho, usuário)
+## 📁 Nova Estrutura de Arquivos
 
-### Tipos Criados:
-- **funnel.ts**: Tipos para dados do funil e props dos steps
-- **app.ts**: Tipos para contexto da aplicação (Template, User, AppContextType)
-
-### Dados Organizados:
-- **templates.ts**: Dados centralizados dos templates
-
-### Utils Organizados:
-- **templateUtils.ts**: Funções utilitárias para renderização de templates
-
-### Arquivos de Índice:
-- **Home/index.ts**: Exportações dos componentes Home
-- **Funnel/index.ts**: Exportações dos componentes Funnel
-- **Layout/index.ts**: Exportações dos componentes Layout
-
----
-
-## Migrações/Divisões planejadas
-
-- Plataform.tsx → components/Template/{HeroSection, TemplateFilters, TemplateList, ProModal, ...}, hooks/useTemplateFilters.ts
-- Search.tsx → components/Search/{SearchBar, SearchFilters, SearchResults}, hooks/useSearch.ts
-- Home.tsx → components/Home/{Notification, Header, HeroSection, BenefitsSection, FooterSection, LoginForm, ForgotPasswordForm}, hooks/useHomeState.tsx
-- Funnel.tsx → components/Funnel/{WelcomeStep, NameStep, AgeStep, CountryStep, StateStep, DiscoveryStep, UsageStep, CanvaStep, ThankYouStep, ProgressBar, LoadingOverlay}, hooks/useFunnel.tsx
-- Layout.tsx → components/Layout/{Header, BottomNavigation, MoreOptionsModal, FeedbackModal}, hooks/useLayoutState.tsx
-- AppContext.tsx → types/app.ts, hooks/useAppState.tsx
-- templateUtils.ts → utils/templateUtils.ts
-- Demais páginas: dividir em componentes de domínio conforme necessário
-- Funções auxiliares → src/utils/
-- Componentes visuais genéricos → src/components/ui/
-
----
-
-**Atualize este arquivo a cada etapa da refatoração!** 
+```
+src/
+├── components/
+│   ├── ui/ (componentes base)
+│   ├── EmptyState.tsx
+│   ├── TemplateCard.tsx
+│   ├── PageHeader.tsx
+│   ├── RemoveConfirmationDialog.tsx
+│   └── [outros componentes específicos]
+├── hooks/
+│   ├── useSearch.ts
+│   ├── useHomeState.tsx
+│   ├── useFunnel.tsx
+│   ├── useLayoutState.tsx
+│   ├── useSavedState.tsx
+│   ├── useFavoritesState.tsx
+│   ├── useAppState.tsx
+│   ├── use-toast.ts
+│   └── use-mobile.tsx
+├── types/
+│   ├── app.ts
+│   └── search.ts
+├── utils/
+│   └── templateUtils.ts
+└── contexts/
+    └── AppContext.tsx
+``` 
