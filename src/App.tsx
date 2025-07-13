@@ -19,6 +19,7 @@ import Saved from "./pages/Saved";
 import Cart from "./pages/Cart";
 import Profile from "./pages/Profile";
 import Support from "./pages/support";
+import Page404 from "./pages/page-404";
 import { AppProvider } from "./contexts/AppContext";
 
 const queryClient = new QueryClient();
@@ -52,6 +53,8 @@ const App = () => {
                   </Routes>
                 </Layout>
               } />
+              {/* Rota catch-all para páginas não encontradas */}
+              <Route path="*" element={<Page404 />} />
             </Routes>
           </BrowserRouter>
         </AppProvider>
