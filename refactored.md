@@ -9,7 +9,7 @@ Legenda:
 - [✔] Home.tsx ✔ (dividido em Notification, Header, HeroSection, BenefitsSection, FooterSection, LoginForm, ForgotPasswordForm, useHomeState)
 - [✔] Plataform.tsx ✔ (dividido em HeroSection, TemplateFilters, TemplateList, ProModal, useTemplateFilters)
 - [✔] Search.tsx ✔ (dividido em SearchBar, SearchFilters, SearchResults, useSearch)
-- [ ] Funnel.tsx ❌
+- [✔] Funnel.tsx ✔ (dividido em WelcomeStep, NameStep, AgeStep, CountryStep, StateStep, DiscoveryStep, UsageStep, CanvaStep, ThankYouStep, ProgressBar, LoadingOverlay, useFunnel)
 - [ ] Signup.tsx ❌
 - [ ] Login.tsx ❌
 - [ ] Profile.tsx ❌
@@ -40,6 +40,18 @@ Legenda:
 - [✔] Home/LoginForm.tsx ✔
 - [✔] Home/ForgotPasswordForm.tsx ✔
 - [✔] Home/index.ts ✔
+- [✔] Funnel/WelcomeStep.tsx ✔
+- [✔] Funnel/NameStep.tsx ✔
+- [✔] Funnel/AgeStep.tsx ✔
+- [✔] Funnel/CountryStep.tsx ✔
+- [✔] Funnel/StateStep.tsx ✔
+- [✔] Funnel/DiscoveryStep.tsx ✔
+- [✔] Funnel/UsageStep.tsx ✔
+- [✔] Funnel/CanvaStep.tsx ✔
+- [✔] Funnel/ThankYouStep.tsx ✔
+- [✔] Funnel/ProgressBar.tsx ✔
+- [✔] Funnel/LoadingOverlay.tsx ✔
+- [✔] Funnel/index.ts ✔
 - [ ] Layout.tsx ❌
 - [ ] templateUtils.ts ❌
 - [ ] ui/ (componentes genéricos) ✔
@@ -49,6 +61,7 @@ Legenda:
 - [✔] useTemplateFilters.ts ✔
 - [✔] useSearch.ts ✔
 - [✔] useHomeState.tsx ✔
+- [✔] useFunnel.tsx ✔
 - [ ] use-toast.ts ❌
 - [ ] use-mobile.tsx ❌
 
@@ -71,6 +84,7 @@ Legenda:
 - Plataform.tsx → components/Template/{HeroSection, TemplateFilters, TemplateList, ProModal, ...}, hooks/useTemplateFilters.ts
 - Search.tsx → components/Search/{SearchBar, SearchFilters, SearchResults}, hooks/useSearch.ts
 - Home.tsx → components/Home/{Notification, Header, HeroSection, BenefitsSection, FooterSection, LoginForm, ForgotPasswordForm}, hooks/useHomeState.tsx
+- Funnel.tsx → components/Funnel/{WelcomeStep, NameStep, AgeStep, CountryStep, StateStep, DiscoveryStep, UsageStep, CanvaStep, ThankYouStep, ProgressBar, LoadingOverlay}, hooks/useFunnel.tsx
 - Demais páginas: dividir em componentes de domínio conforme necessário
 - Funções auxiliares → src/utils/
 - Componentes visuais genéricos → src/components/ui/
