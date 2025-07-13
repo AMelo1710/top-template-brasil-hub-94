@@ -122,8 +122,16 @@ const Cart = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {cartProducts.map((product) => {
           const IconComponent = product.icon;
+          const isNoAdsCard = product.id === 'no-ads';
           return (
-            <Card key={product.id} className="hover:shadow-hover transition-all duration-300" data-product={product.id}>
+            <Card 
+              key={product.id} 
+              className={`hover:shadow-hover transition-all duration-300 ${
+                isNoAdsCard ? 'animate-pulse bg-gradient-to-r from-green-50 to-green-100 border-2 border-green-300' : ''
+              }`} 
+              data-product={product.id}
+              id={product.id}
+            >
               <CardHeader>
                 <CardTitle className="text-lg text-primary">{product.title}</CardTitle>
               </CardHeader>

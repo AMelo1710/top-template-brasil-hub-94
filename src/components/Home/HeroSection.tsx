@@ -13,7 +13,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLoginClick }) => {
         <div 
           className="absolute inset-0 rounded-xl bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: `url('/lovable-uploads/77988cbe-a964-4668-a3dd-a5eb76475705.png')`
+            backgroundImage: `url('/assets/banner-img.png')`
           }}
         ></div>
         
@@ -24,7 +24,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLoginClick }) => {
         <div className="absolute top-8 left-8 z-10">
           <div className="flex items-center gap-3 bg-white/20 backdrop-blur-sm rounded-lg p-3">
             <img 
-              src="/lovable-uploads/4d7f282c-259d-4106-abef-7a35e2e525ba.png" 
+              src="/assets/logo-light.png" 
               alt="Top Templates Brasil"
               className="w-10 h-10"
             />

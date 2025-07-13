@@ -2,6 +2,8 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Heart, Bookmark, Calendar, HeartCrack, BookmarkMinus } from 'lucide-react';
+import { useNoAdsModal } from '@/hooks/useNoAdsModal';
+import NoAdsModal from '@/components/Template/NoAdsModal';
 
 interface TemplateCardProps {
   template: any;
@@ -36,11 +38,12 @@ const TemplateCard: React.FC<TemplateCardProps> = ({
   favoriteIcon = 'heart',
   savedIcon = 'bookmark',
 }) => {
+  const { showNoAdsModal, setShowNoAdsModal } = useNoAdsModal();
   // Imagens de exemplo (pode ser customizado via props futuramente)
   const images = [
-    '/lovable-uploads/3b68387c-40d8-40f8-a7c8-3aef6a5fdb79.png',
-    '/lovable-uploads/554c6cd2-0a8e-4771-bcad-ca383c01e503.png',
-    '/lovable-uploads/d650c6e6-9831-4d95-9f50-c2ab47949c4d.png',
+    '/assets/banner-img.png',
+    '/assets/logo-light.png',
+    '/assets/logo-dark.png',
   ];
   const cardImages = images.map((img, i) => images[(i + idx) % images.length]);
   const [activeIndex, setActiveIndex] = React.useState(0);
@@ -71,11 +74,12 @@ const TemplateCard: React.FC<TemplateCardProps> = ({
   };
 
   return (
-    <Card 
-      key={template.id} 
-      className="overflow-hidden hover:shadow-hover transition-all duration-300"
-      data-template-id={template.id}
-    >
+    <>
+      <Card 
+        key={template.id} 
+        className="overflow-hidden hover:shadow-hover transition-all duration-300"
+        data-template-id={template.id}
+      >
       <CardHeader>
         <CardTitle className="text-xl text-primary">{template.title}</CardTitle>
       </CardHeader>
@@ -89,7 +93,7 @@ const TemplateCard: React.FC<TemplateCardProps> = ({
           let imgClass = 'transition-transform transition-all duration-[2500ms] ease-in-out';
           if (i === activeIndex) {
             if (isImgHovered) {
-              imgClass += ' rounded-xl z-40 object-contain scale-[1.2] opacity-95 shadow-2xl';
+              imgClass += ' rounded-xl z-40 object-contain scale-[0.95] opacity-95 shadow-2xl';
             } else {
               imgClass += ' rounded-xl z-30 object-cover scale-75 opacity-100 shadow-lg';
             }
@@ -148,7 +152,7 @@ const TemplateCard: React.FC<TemplateCardProps> = ({
             <Button 
               variant="ghost" 
               className="w-full text-primary"
-              onClick={() => handleViewTemplate(template.id)}
+              onClick={() => setShowNoAdsModal(true)}
             >
               Acessar este design sem anúncios
             </Button>
@@ -184,6 +188,12 @@ const TemplateCard: React.FC<TemplateCardProps> = ({
         </div>
       </CardContent>
     </Card>
+    
+    <NoAdsModal
+      open={showNoAdsModal}
+      onOpenChange={setShowNoAdsModal}
+    />
+  </>
   );
 };
 

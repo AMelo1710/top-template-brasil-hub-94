@@ -11,7 +11,7 @@ export const templates = [
     date: 'há 2 dias atrás',
     price: 29.90,
     tool: 'Canva',
-    image: '/lovable-uploads/3b68387c-40d8-40f8-a7c8-3aef6a5fdb79.png',
+    image: '/assets/banner-img.png',
     categories: ['Apresentações', '🔥Em alta🔥'],
     tags: ['apresentação', 'moderno', 'corporativo', 'canva', 'slides']
   },
@@ -25,7 +25,7 @@ export const templates = [
     date: 'há 1 dia atrás',
     price: 19.90,
     tool: 'PowerPoint',
-    image: '/lovable-uploads/554c6cd2-0a8e-4771-bcad-ca383c01e503.png',
+    image: '/assets/logo-light.png',
     categories: ['Currículos'],
     tags: ['currículo', 'criativo', 'moderno', 'powerpoint', 'trabalho']
   },
@@ -39,7 +39,7 @@ export const templates = [
     date: 'há 3 dias atrás',
     price: 39.90,
     tool: 'Google Presentation',
-    image: '/lovable-uploads/d650c6e6-9831-4d95-9f50-c2ab47949c4d.png',
+    image: '/assets/logo-dark.png',
     categories: ['🔥Em alta🔥'],
     tags: ['apresentação', 'corporativa', 'negócios', 'google', 'slides']
   },
@@ -53,7 +53,7 @@ export const templates = [
     date: 'há 5 dias atrás',
     price: 24.90,
     tool: 'Canva',
-    image: '/lovable-uploads/77988cbe-a964-4668-a3dd-a5eb76475705.png',
+    image: '/assets/banner-img.png',
     categories: ['Posts'],
     tags: ['infográfico', 'educativo', 'visual', 'canva', 'design']
   },
@@ -67,7 +67,7 @@ export const templates = [
     date: 'há 1 semana atrás',
     price: 15.90,
     tool: 'Canva',
-    image: '/lovable-uploads/4d7f282c-259d-4106-abef-7a35e2e525ba.png',
+    image: '/assets/logo-light.png',
     categories: ['Cartões de Visita'],
     tags: ['cartão', 'visita', 'elegante', 'profissional', 'canva']
   },
@@ -81,7 +81,7 @@ export const templates = [
     date: 'há 2 semanas atrás',
     price: 12.90,
     tool: 'PowerPoint',
-    image: '/lovable-uploads/3b68387c-40d8-40f8-a7c8-3aef6a5fdb79.png',
+    image: '/assets/banner-img.png',
     categories: ['Redes Sociais'],
     tags: ['post', 'redes', 'sociais', 'criativo', 'powerpoint']
   }

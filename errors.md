@@ -89,4 +89,63 @@ Ação: Clica em "Voltar"
 
 Volta para a pergunta: "De qual estado você é?" ❌ (errado, essa pergunta nunca deveria ter sido exibida)
 
-# Error 3 - 
+# Error 3 - invalid-designs-rendered-from-missing-template-ids **fixed**
+
+Cenário Sem Erro (Funcionamento Correto)
+Contexto:
+O arquivo templates.ts contém os IDs válidos de designs.
+
+As páginas /plataform/saved e /plataform/favorites exibem somente os designs cujo ID está listado em templates.ts.
+
+Qualquer design cujo ID não esteja em templates.ts não aparece na interface.
+
+Exemplo:
+templates.ts:
+
+ts
+Copiar
+Editar
+export const validTemplateIds = ['design-1', 'design-2'];
+Designs salvos pelo usuário:
+
+design-1 ✅
+
+design-2 ✅
+
+design-3 ❌ (não está em templates.ts)
+
+Exibição esperada:
+
+Página /plataform/saved: mostra apenas design-1 e design-2.
+
+Página /plataform/favorites: mostra apenas design-1 e design-2.
+
+Cenário Com Erro (Funcionamento Incorreto)
+Contexto:
+O arquivo templates.ts continua com os mesmos IDs válidos.
+
+As páginas estão exibindo todos os designs salvos/favoritados, inclusive os que não estão em templates.ts, quando deveriam filtrar.
+
+Exemplo:
+templates.ts:
+
+ts
+Copiar
+Editar
+export const validTemplateIds = ['design-1', 'design-2'];
+Designs salvos pelo usuário:
+
+design-1 ✅
+
+design-2 ✅
+
+design-3 ❌ (inválido)
+
+Exibição incorreta:
+
+Página /plataform/saved: mostra design-1, design-2 e design-3 ❌
+
+Página /plataform/favorites: idem
+
+Problema:
+O sistema não está filtrando corretamente com base em templates.ts, e designs inválidos ainda estão sendo exibidos.
