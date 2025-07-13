@@ -118,28 +118,36 @@ const Login = () => {
             </label>
           </div>
 
-          {/* Password Input */}
-          <div className="flex flex-wrap items-end gap-4 py-3">
-            <label className="flex flex-col min-w-0 flex-1 w-full relative">
-              <Input
-                type={showPassword ? "text" : "password"}
-                placeholder="Senha"
-                value={loginForm.password}
-                onChange={(e) => setLoginForm({ ...loginForm, password: e.target.value })}
-                className="h-14 text-base rounded-xl bg-muted border-none focus:ring-2 focus:ring-ring pr-12"
-              />
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-              >
-                {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-              </button>
-              {loginForm.password && loginForm.password.length < 8 && (
-                <div className="text-red-500 text-xs mt-1 px-1">A senha deve ter pelo menos 8 caracteres</div>
-              )}
-            </label>
-          </div>
+                  {/* Password Input */}
+        <div className="flex flex-wrap items-end gap-4 py-3">
+          <label className="flex flex-col min-w-0 flex-1 w-full relative">
+            <Input
+              type={showPassword ? "text" : "password"}
+              placeholder="Senha"
+              value={loginForm.password}
+              onChange={(e) => setLoginForm({ ...loginForm, password: e.target.value })}
+              className="h-14 text-base rounded-xl bg-muted border-none focus:ring-2 focus:ring-ring pr-12"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+            >
+              {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+            </button>
+            {loginForm.password && loginForm.password.length < 8 && (
+              <div className="text-red-500 text-xs mt-1 px-1">A senha deve ter pelo menos 8 caracteres</div>
+            )}
+          </label>
+        </div>
+
+        {/* Forgot Password Link */}
+        <button
+          onClick={() => navigate('/forgot-password')}
+          className="text-secondary text-sm font-normal leading-normal pb-3 pt-1 px-4 underline hover:text-primary transition-colors text-left"
+        >
+          Esqueceu sua senha?
+        </button>
         </form>
       </div>
 

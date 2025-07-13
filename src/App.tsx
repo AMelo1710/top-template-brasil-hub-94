@@ -8,6 +8,7 @@ import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import ForgotPassword from "./pages/ForgotPassword";
 import Funnel from "./pages/Funnel";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -19,7 +20,7 @@ import Saved from "./pages/Saved";
 import Cart from "./pages/Cart";
 import Profile from "./pages/Profile";
 import Support from "./pages/support";
-import Page404 from "./pages/page-404";
+import Page404 from "./pages/Page-404";
 import { AppProvider } from "./contexts/AppContext";
 
 const queryClient = new QueryClient();
@@ -36,6 +37,7 @@ const App = () => {
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/funnel" element={<Funnel />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
