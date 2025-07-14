@@ -8,7 +8,6 @@ import { useToast } from '@/hooks/use-toast';
 import { useNavigate } from 'react-router-dom';
 import TemplateCard from '@/components/TemplateCard';
 import { renderCategoryTag, getPlatformBadge } from '@/utils/templateUtils';
-import { getValidTemplateIds, getTemplateById } from '@/data/templates';
 
 const Favorites = () => {
   const { 
@@ -25,13 +24,13 @@ const Favorites = () => {
 
   // Filtrar apenas os favoritos que têm templates válidos
   const validFavorites = useMemo(() => {
-    const validIds = getValidTemplateIds();
     return favorites
-      .filter(favorite => validIds.includes(favorite.id))
+      .filter(favorite => favorite.id) // Assuming favorite.id is always present
       .map(favorite => {
         // Buscar o template completo do arquivo templates.ts
-        const template = getTemplateById(favorite.id);
-        return template || favorite; // Fallback para o item original se não encontrar
+        // This part needs to be adapted if templates are not local
+        // For now, we'll just return the favorite as is if no template data is available
+        return favorite;
       });
   }, [favorites]);
 

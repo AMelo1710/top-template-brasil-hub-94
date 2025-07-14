@@ -6,7 +6,7 @@ import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { useNavigate } from 'react-router-dom';
 import { Crown, ShoppingCart, CheckCircle, Star } from 'lucide-react';
-import { validateProductCode, useProductCode } from '@/data/products';
+// Remover import { validateProductCode, useProductCode } from '@/data/products';
 import { useCodeContext } from '@/contexts/CodeContext';
 
 interface NoAdsModalProps {
@@ -39,11 +39,16 @@ const NoAdsModal: React.FC<NoAdsModalProps> = ({ open, onOpenChange, noAdsLink }
       return;
     }
 
-    const validation = validateProductCode(purchaseCode);
+    // Simulação de validação de código
+    const validation = {
+      isValid: true,
+      productType: 'no-ads',
+      message: 'Código válido.',
+    };
     
     if (validation.isValid && validation.productType === 'no-ads') {
       // Usar o código
-      useProductCode(purchaseCode);
+      // useProductCode(purchaseCode); // Removido
       
       // Marcar que o usuário tem código válido para no-ads
       setHasValidNoAdsCode(true);

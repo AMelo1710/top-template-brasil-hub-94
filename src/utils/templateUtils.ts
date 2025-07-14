@@ -1,6 +1,22 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { categoryColors, toolColors } from '@/data/templates';
+
+// Mock de cores para categorias
+const categoryColors: Record<string, { bg: string; text: string; border: string; hover: string }> = {
+  'Em alta': { bg: 'bg-yellow-200', text: 'text-yellow-900', border: 'border-yellow-400', hover: 'hover:bg-yellow-300' },
+  'Negócios': { bg: 'bg-blue-200', text: 'text-blue-900', border: 'border-blue-400', hover: 'hover:bg-blue-300' },
+  'Educação': { bg: 'bg-green-200', text: 'text-green-900', border: 'border-green-400', hover: 'hover:bg-green-300' },
+  'Todos': { bg: 'bg-gray-200', text: 'text-gray-900', border: 'border-gray-400', hover: 'hover:bg-gray-300' },
+  // Adicione outras categorias conforme necessário
+};
+
+// Mock de cores para ferramentas
+const toolColors: Record<string, { bg: string; text: string; border: string; hover: string }> = {
+  'Google Presentation': { bg: 'bg-yellow-100', text: 'text-yellow-800', border: 'border-yellow-300', hover: 'hover:bg-yellow-200' },
+  'Canva': { bg: 'bg-purple-100', text: 'text-purple-800', border: 'border-purple-300', hover: 'hover:bg-purple-200' },
+  'PowerPoint': { bg: 'bg-orange-100', text: 'text-orange-800', border: 'border-orange-300', hover: 'hover:bg-orange-200' },
+  // Adicione outras ferramentas conforme necessário
+};
 
 /**
  * Renderiza uma tag de categoria com cores específicas

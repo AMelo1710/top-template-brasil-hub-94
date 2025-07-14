@@ -8,7 +8,6 @@ import { useToast } from '@/hooks/use-toast';
 import { useNavigate } from 'react-router-dom';
 import TemplateCard from '@/components/TemplateCard';
 import { renderCategoryTag, getPlatformBadge } from '@/utils/templateUtils';
-import { getValidTemplateIds, getTemplateById } from '@/data/templates';
 
 const Saved = () => {
   const { saved, removeFromSaved, addToFavorites, removeFromFavorites, isFavorite } = useApp();
@@ -19,13 +18,12 @@ const Saved = () => {
 
   // Filtrar apenas os salvos que têm templates válidos
   const validSaved = useMemo(() => {
-    const validIds = getValidTemplateIds();
     return saved
-      .filter(savedItem => validIds.includes(savedItem.id))
       .map(savedItem => {
         // Buscar o template completo do arquivo templates.ts
-        const template = getTemplateById(savedItem.id);
-        return template || savedItem; // Fallback para o item original se não encontrar
+        // Remover import { getValidTemplateIds, getTemplateById } from '@/data/templates';
+        // Ajustar para não depender de dados locais
+        return savedItem; // Fallback para o item original se não encontrar
       });
   }, [saved]);
 

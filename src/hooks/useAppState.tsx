@@ -15,35 +15,8 @@ export const useAppState = (): AppContextType => {
     avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
   });
 
-  // Load data from localStorage
-  useEffect(() => {
-    const savedFavorites = localStorage.getItem('favorites');
-    const savedItems = localStorage.getItem('saved');
-    const savedCart = localStorage.getItem('cart');
-    const savedUser = localStorage.getItem('user');
-
-    if (savedFavorites) setFavorites(JSON.parse(savedFavorites));
-    if (savedItems) setSaved(JSON.parse(savedItems));
-    if (savedCart) setCart(JSON.parse(savedCart));
-    if (savedUser) setUser(JSON.parse(savedUser));
-  }, []);
-
-  // Save to localStorage when data changes
-  useEffect(() => {
-    localStorage.setItem('favorites', JSON.stringify(favorites));
-  }, [favorites]);
-
-  useEffect(() => {
-    localStorage.setItem('saved', JSON.stringify(saved));
-  }, [saved]);
-
-  useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cart));
-  }, [cart]);
-
-  useEffect(() => {
-    localStorage.setItem('user', JSON.stringify(user));
-  }, [user]);
+  // Removido: useEffect para carregar dados do localStorage
+  // Removido: useEffect para salvar dados no localStorage
 
   const addToFavorites = (template: Template) => {
     setFavorites(prev => [...prev.filter(t => t.id !== template.id), template]);
