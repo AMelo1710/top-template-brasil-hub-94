@@ -13,7 +13,9 @@ export const templates = [
     tool: 'Canva',
     image: '/assets/banner-img.png',
     categories: ['Apresentações', '🔥Em alta🔥'],
-    tags: ['apresentação', 'moderno', 'corporativo', 'canva', 'slides']
+    tags: ['apresentação', 'moderno', 'corporativo', 'canva', 'slides'],
+    freeLink: 'https://www.canva.com/design/DAF123456/view',
+    noAdsLink: 'https://www.canva.com/design/DAF123456/view?premium=true'
   },
   {
     id: 'template-curriculo-criativo',
@@ -27,7 +29,9 @@ export const templates = [
     tool: 'PowerPoint',
     image: '/assets/logo-light.png',
     categories: ['Currículos'],
-    tags: ['currículo', 'criativo', 'moderno', 'powerpoint', 'trabalho']
+    tags: ['currículo', 'criativo', 'moderno', 'powerpoint', 'trabalho'],
+    freeLink: 'https://www.canva.com/design/DAF789012/view',
+    noAdsLink: 'https://www.canva.com/design/DAF789012/view?premium=true'
   },
   {
     id: 'template-apresentacao-corporativa',
@@ -41,7 +45,9 @@ export const templates = [
     tool: 'Google Presentation',
     image: '/assets/logo-dark.png',
     categories: ['🔥Em alta🔥'],
-    tags: ['apresentação', 'corporativa', 'negócios', 'google', 'slides']
+    tags: ['apresentação', 'corporativa', 'negócios', 'google', 'slides'],
+    freeLink: 'https://docs.google.com/presentation/d/1ABC123/edit',
+    noAdsLink: 'https://docs.google.com/presentation/d/1ABC123/edit?premium=true'
   },
   {
     id: 'template-infografico-educativo',
@@ -55,7 +61,9 @@ export const templates = [
     tool: 'Canva',
     image: '/assets/banner-img.png',
     categories: ['Posts'],
-    tags: ['infográfico', 'educativo', 'visual', 'canva', 'design']
+    tags: ['infográfico', 'educativo', 'visual', 'canva', 'design'],
+    freeLink: 'https://www.canva.com/design/DAF345678/view',
+    noAdsLink: 'https://www.canva.com/design/DAF345678/view?premium=true'
   },
   {
     id: 'template-cartao-visita-elegante',
@@ -69,7 +77,9 @@ export const templates = [
     tool: 'Canva',
     image: '/assets/logo-light.png',
     categories: ['Cartões de Visita'],
-    tags: ['cartão', 'visita', 'elegante', 'profissional', 'canva']
+    tags: ['cartão', 'visita', 'elegante', 'profissional', 'canva'],
+    freeLink: 'https://www.canva.com/design/DAF901234/view',
+    noAdsLink: 'https://www.canva.com/design/DAF901234/view?premium=true'
   },
   {
     id: 'template-post-redes-sociais',
@@ -83,7 +93,9 @@ export const templates = [
     tool: 'PowerPoint',
     image: '/assets/banner-img.png',
     categories: ['Redes Sociais'],
-    tags: ['post', 'redes', 'sociais', 'criativo', 'powerpoint']
+    tags: ['post', 'redes', 'sociais', 'criativo', 'powerpoint'],
+    freeLink: 'https://www.canva.com/design/DAF567890/view',
+    noAdsLink: 'https://www.canva.com/design/DAF567890/view?premium=true'
   }
 ];
 

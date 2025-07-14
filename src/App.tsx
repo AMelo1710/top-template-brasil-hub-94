@@ -22,6 +22,8 @@ import Profile from "./pages/Profile";
 import Support from "./pages/support";
 import Page404 from "./pages/Page-404";
 import { AppProvider } from "./contexts/AppContext";
+import { CodeProvider } from "./contexts/CodeContext";
+import { AuthProvider } from "./hooks/useAuth";
 
 const queryClient = new QueryClient();
 
@@ -30,9 +32,11 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <AppProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
+          <AuthProvider>
+            <CodeProvider>
+              <Toaster />
+              <Sonner />
+              <BrowserRouter>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
@@ -59,6 +63,8 @@ const App = () => {
               <Route path="*" element={<Page404 />} />
             </Routes>
           </BrowserRouter>
+            </CodeProvider>
+          </AuthProvider>
         </AppProvider>
       </TooltipProvider>
     </QueryClientProvider>

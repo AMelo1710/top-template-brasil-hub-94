@@ -6,41 +6,83 @@ import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { useNavigate } from 'react-router-dom';
 import { Crown, ShoppingCart, CheckCircle, Star } from 'lucide-react';
+import { validateProductCode, useProductCode } from '@/data/products';
+import { useCodeContext } from '@/contexts/CodeContext';
 
 interface NoAdsModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  noAdsLink?: string;
 }
 
-const NoAdsModal: React.FC<NoAdsModalProps> = ({ open, onOpenChange }) => {
+const NoAdsModal: React.FC<NoAdsModalProps> = ({ open, onOpenChange, noAdsLink }) => {
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { setHasValidNoAdsCode } = useCodeContext();
   const [purchaseCode, setPurchaseCode] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isCodeValid, setIsCodeValid] = useState(false);
+
+  // Resetar estado quando modal for fechado
+  const handleOpenChange = (newOpen: boolean) => {
+    if (!newOpen) {
+      setIsCodeValid(false);
+      setPurchaseCode('');
+      setErrorMessage('');
+    }
+    onOpenChange(newOpen);
+  };
 
   const handleSubmitCode = () => {
-    if (purchaseCode.trim()) {
+    if (!purchaseCode.trim()) {
+      setErrorMessage('Por favor, insira um código válido.');
+      return;
+    }
+
+    const validation = validateProductCode(purchaseCode);
+    
+    if (validation.isValid && validation.productType === 'no-ads') {
+      // Usar o código
+      useProductCode(purchaseCode);
+      
+      // Marcar que o usuário tem código válido para no-ads
+      setHasValidNoAdsCode(true);
+      
       toast({
         title: "Código válido!",
         description: "Acesso sem anúncios ativado com sucesso.",
       });
+      
+      setIsCodeValid(true);
+      setErrorMessage('');
       setPurchaseCode('');
-      onOpenChange(false);
+      
+      // NÃO fechar o modal automaticamente - deixar o usuário clicar no botão
     } else {
+      setErrorMessage(validation.message);
       toast({
         title: "Erro",
-        description: "Por favor, insira um código válido.",
+        description: validation.message,
         variant: "destructive"
       });
     }
   };
 
+  const handleAccessNoAds = () => {
+    if (isCodeValid && noAdsLink) {
+      window.open(noAdsLink, '_blank');
+      // Fechar modal após abrir o link
+      handleOpenChange(false);
+    }
+  };
+
   const handleGoToCart = () => {
-    onOpenChange(false);
+    handleOpenChange(false);
     navigate('/plataform/cart');
   };
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent className="sm:max-w-xs p-0 overflow-hidden">
         {/* Header compacto */}
         <div className="relative bg-gradient-to-br from-purple-600 via-blue-600 to-indigo-700 p-4 text-white">
@@ -81,10 +123,18 @@ const NoAdsModal: React.FC<NoAdsModalProps> = ({ open, onOpenChange }) => {
             <Input
               id="purchaseCode"
               value={purchaseCode}
-              onChange={(e) => setPurchaseCode(e.target.value)}
+              onChange={(e) => {
+                setPurchaseCode(e.target.value);
+                setErrorMessage('');
+              }}
               placeholder="Digite seu código..."
-              className="h-9 text-center text-sm font-mono border-2 border-gray-200 focus:border-purple-500 focus:ring-purple-500"
+              className={`h-9 text-center text-sm font-mono border-2 focus:ring-purple-500 ${
+                errorMessage ? 'border-red-500' : 'border-gray-200 focus:border-purple-500'
+              }`}
             />
+            {errorMessage && (
+              <p className="text-xs text-red-500 text-center">{errorMessage}</p>
+            )}
           </div>
 
           {/* Botões */}
@@ -96,6 +146,17 @@ const NoAdsModal: React.FC<NoAdsModalProps> = ({ open, onOpenChange }) => {
               <CheckCircle className="w-4 h-4 mr-1" />
               Verificar Código
             </Button>
+            
+            {isCodeValid && noAdsLink && (
+              <Button 
+                onClick={handleAccessNoAds}
+                className="w-full h-9 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold text-sm hover:from-green-700 hover:to-emerald-700"
+              >
+                <CheckCircle className="w-4 h-4 mr-1" />
+                Acessar Este Design Sem Anúncios
+              </Button>
+            )}
+            
             <div className="flex items-center justify-center text-xs text-gray-400">ou</div>
             <Button 
               onClick={handleGoToCart}
@@ -119,7 +180,7 @@ const NoAdsModal: React.FC<NoAdsModalProps> = ({ open, onOpenChange }) => {
         {/* Botão de fechar */}
         <Button 
           variant="ghost" 
-          onClick={() => onOpenChange(false)}
+          onClick={() => handleOpenChange(false)}
           className="absolute top-2 right-2 text-white hover:bg-white/20 p-1 h-7 w-7"
         >
           

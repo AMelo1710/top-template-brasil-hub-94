@@ -7,45 +7,18 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { useNavigate } from 'react-router-dom';
+import { getAllProducts, validateProductCode, useProductCode } from '@/data/products';
+import { useCodeContext } from '@/contexts/CodeContext';
 
 const Cart = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { setHasValidNoAdsCode, setHasValidPremiumCode, setHasValidCourseCode } = useCodeContext();
   const [showRedeemModal, setShowRedeemModal] = useState(false);
   const [redeemCode, setRedeemCode] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const cartProducts = [
-    {
-      id: 'premium',
-      title: 'Acesso Premium',
-      description: 'Acesso completo a todos os templates premium com recursos avançados e suporte prioritário.',
-      price: 49.90,
-      icon: Crown,
-      color: 'bg-yellow-200',
-      iconColor: 'text-yellow-600',
-      platforms: ['Canva', 'PowerPoint', 'Google Presentation']
-    },
-    {
-      id: 'no-ads',
-      title: 'Remover Anúncios',
-      description: 'Navegue pela plataforma sem interrupções de anúncios e tenha uma experiência mais fluida.',
-      price: 19.90,
-      icon: Zap,
-      color: 'bg-green-200',
-      iconColor: 'text-green-600',
-      platforms: ['Canva', 'PowerPoint']
-    },
-    {
-      id: 'course',
-      title: 'Acessar Curso',
-      description: 'Curso completo de design com tutoriais passo a passo e certificado de conclusão.',
-      price: 89.90,
-      icon: PlayCircle,
-      color: 'bg-purple-200',
-      iconColor: 'text-purple-600',
-      platforms: ['Canva', 'Google Presentation']
-    }
-  ];
+  const cartProducts = getAllProducts();
 
   const handlePurchase = (productTitle: string) => {
     toast({
@@ -55,17 +28,39 @@ const Cart = () => {
   };
 
   const handleRedeemCode = () => {
-    if (redeemCode.trim()) {
+    if (!redeemCode.trim()) {
+      setErrorMessage('Por favor, insira um código válido.');
+      return;
+    }
+
+    const validation = validateProductCode(redeemCode);
+    
+    if (validation.isValid) {
+      // Usar o código
+      useProductCode(redeemCode);
+      
+      // Marcar o tipo de código válido no contexto
+      if (validation.productType === 'no-ads') {
+        setHasValidNoAdsCode(true);
+      } else if (validation.productType === 'premium') {
+        setHasValidPremiumCode(true);
+      } else if (validation.productType === 'course') {
+        setHasValidCourseCode(true);
+      }
+      
       toast({
         title: "Código resgatado!",
         description: `Código "${redeemCode}" foi aplicado com sucesso.`,
       });
+      
       setRedeemCode('');
+      setErrorMessage('');
       setShowRedeemModal(false);
     } else {
+      setErrorMessage(validation.message);
       toast({
         title: "Erro",
-        description: "Por favor, insira um código válido.",
+        description: validation.message,
         variant: "destructive"
       });
     }
@@ -121,8 +116,22 @@ const Cart = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {cartProducts.map((product) => {
-          const IconComponent = product.icon;
           const isNoAdsCard = product.id === 'no-ads';
+          
+          // Função para renderizar o ícone baseado na string
+          const renderIcon = (iconName: string, className: string) => {
+            switch (iconName) {
+              case 'Crown':
+                return <Crown className={className} />;
+              case 'Zap':
+                return <Zap className={className} />;
+              case 'PlayCircle':
+                return <PlayCircle className={className} />;
+              default:
+                return <Crown className={className} />;
+            }
+          };
+          
           return (
             <Card 
               key={product.id} 
@@ -137,7 +146,7 @@ const Cart = () => {
               </CardHeader>
               
               <div className={`h-32 ${product.color} flex items-center justify-center`}>
-                <IconComponent className={`w-12 h-12 ${product.iconColor}`} />
+                {renderIcon(product.icon, `w-12 h-12 ${product.iconColor}`)}
               </div>
               
               <CardContent className="p-4 space-y-4">
@@ -187,9 +196,16 @@ const Cart = () => {
               <Input
                 id="redeemCode"
                 value={redeemCode}
-                onChange={(e) => setRedeemCode(e.target.value)}
+                onChange={(e) => {
+                  setRedeemCode(e.target.value);
+                  setErrorMessage('');
+                }}
                 placeholder="Digite seu código aqui..."
+                className={errorMessage ? 'border-red-500' : ''}
               />
+              {errorMessage && (
+                <p className="text-xs text-red-500 mt-1">{errorMessage}</p>
+              )}
             </div>
           </div>
           <DialogFooter className="flex items-center justify-between gap-2">

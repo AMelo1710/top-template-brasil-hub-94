@@ -6,6 +6,8 @@ export interface Template {
   color: string;
   date: string;
   price: number;
+  freeLink: string;
+  noAdsLink: string;
 }
 
 export interface User {

@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Heart, Bookmark, Calendar, HeartCrack, BookmarkMinus } from 'lucide-react';
 import { useNoAdsModal } from '@/hooks/useNoAdsModal';
 import NoAdsModal from '@/components/Template/NoAdsModal';
+import { useCodeContext } from '@/contexts/CodeContext';
 
 interface TemplateCardProps {
   template: any;
@@ -39,6 +40,7 @@ const TemplateCard: React.FC<TemplateCardProps> = ({
   savedIcon = 'bookmark',
 }) => {
   const { showNoAdsModal, setShowNoAdsModal } = useNoAdsModal();
+  const { hasValidNoAdsCode } = useCodeContext();
   // Imagens de exemplo (pode ser customizado via props futuramente)
   const images = [
     '/assets/banner-img.png',
@@ -146,13 +148,24 @@ const TemplateCard: React.FC<TemplateCardProps> = ({
         )}
         {showActions && (
           <div className="space-y-2">
-            <Button className="w-full">
+            <Button 
+              className="w-full"
+              onClick={() => template.freeLink && window.open(template.freeLink, '_blank')}
+            >
               Acessar este design
             </Button>
             <Button 
               variant="ghost" 
               className="w-full text-primary"
-              onClick={() => setShowNoAdsModal(true)}
+              onClick={() => {
+                if (hasValidNoAdsCode && template.noAdsLink) {
+                  // Se tem código válido, acessa diretamente
+                  window.open(template.noAdsLink, '_blank');
+                } else {
+                  // Se não tem código válido, abre o modal
+                  setShowNoAdsModal(true);
+                }
+              }}
             >
               Acessar este design sem anúncios
             </Button>
@@ -192,6 +205,7 @@ const TemplateCard: React.FC<TemplateCardProps> = ({
     <NoAdsModal
       open={showNoAdsModal}
       onOpenChange={setShowNoAdsModal}
+      noAdsLink={template.noAdsLink}
     />
   </>
   );
