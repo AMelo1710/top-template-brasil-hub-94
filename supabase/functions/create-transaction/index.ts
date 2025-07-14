@@ -12,19 +12,8 @@ serve(async (req) => {
   }
 
   try {
-    const supabaseClient = createClient(
-      Deno.env.get('SUPABASE_URL') ?? '',
-      Deno.env.get('SUPABASE_ANON_KEY') ?? '',
-    )
-
-    const authHeader = req.headers.get('Authorization')!
-    const token = authHeader.replace('Bearer ', '')
-    const { data: { user } } = await supabaseClient.auth.getUser(token)
-
-    if (!user) {
-      throw new Error('Unauthorized')
-    }
-
+    // Para permitir pagamentos sem autenticação Supabase
+    // já que você tem seu próprio sistema de auth
     const { product, customer, ip } = await req.json()
 
     // Get API credentials from secrets
@@ -35,14 +24,15 @@ serve(async (req) => {
       throw new Error('API credentials not configured')
     }
 
-    // Create external ID
-    const externalId = `${user.id}-${Date.now()}`
+    // Create external ID usando timestamp para guests
+    const externalId = `guest-${Date.now()}`
 
     // Prepare transaction data
     const transactionData = {
       external_id: externalId,
       total_amount: product.price,
       payment_method: "PIX",
+      webhook_url: "https://toptemplatesbrasil.com.br/webhooks", // URL do webhook
       items: [
         {
           id: product.id,
@@ -81,11 +71,16 @@ serve(async (req) => {
 
     const sunizeResponse = await response.json()
 
-    // Store transaction in database
+    // Store transaction in database usando service role
+    const supabaseClient = createClient(
+      Deno.env.get('SUPABASE_URL') ?? '',
+      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '',
+    )
+
     const { data: transaction, error: dbError } = await supabaseClient
       .from('transactions')
       .insert({
-        user_id: user.id,
+        user_id: null, // Para guests, null é permitido
         external_id: externalId,
         sunize_transaction_id: sunizeResponse.id,
         status: sunizeResponse.status,

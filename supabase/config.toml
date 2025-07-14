@@ -1,1 +1,12 @@
 project_id = "nstmhruhdscrdamljhlp"
+
+[auth]
+enabled = true
+additional_redirect_urls = ["https://localhost:3000"]
+site_url = "http://localhost:3000"
+
+[functions.create-transaction]
+verify_jwt = false
+
+[functions.webhook-transaction]
+verify_jwt = false

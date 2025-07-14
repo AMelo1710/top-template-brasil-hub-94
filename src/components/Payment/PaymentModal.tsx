@@ -64,6 +64,7 @@ const PaymentModal = ({ open, onOpenChange, product }: PaymentModalProps) => {
       const ipResponse = await fetch('https://api.ipify.org?format=json');
       const { ip } = await ipResponse.json();
 
+      // Call edge function sem autenticação
       const { data, error } = await supabase.functions.invoke('create-transaction', {
         body: {
           product,
