@@ -12,8 +12,19 @@ serve(async (req) => {
   }
 
   try {
-    // Para permitir pagamentos sem autenticação Supabase
-    // já que você tem seu próprio sistema de auth
+    const supabaseClient = createClient(
+      Deno.env.get('SUPABASE_URL') ?? '',
+      Deno.env.get('SUPABASE_ANON_KEY') ?? '',
+    )
+
+    const authHeader = req.headers.get('Authorization')!
+    const token = authHeader.replace('Bearer ', '')
+    const { data: { user } } = await supabaseClient.auth.getUser(token)
+
+    if (!user) {
+      throw new Error('Unauthorized')
+    }
+
     const { product, customer, ip } = await req.json()
 
     // Get API credentials from secrets
@@ -24,8 +35,8 @@ serve(async (req) => {
       throw new Error('API credentials not configured')
     }
 
-    // Create external ID usando timestamp para guests
-    const externalId = `guest-${Date.now()}`
+    // Create external ID
+    const externalId = `${user.id}-${Date.now()}`
 
     // Prepare transaction data
     const transactionData = {
@@ -80,7 +91,7 @@ serve(async (req) => {
     const { data: transaction, error: dbError } = await supabaseClient
       .from('transactions')
       .insert({
-        user_id: null, // Para guests, null é permitido
+        user_id: user.id,
         external_id: externalId,
         sunize_transaction_id: sunizeResponse.id,
         status: sunizeResponse.status,

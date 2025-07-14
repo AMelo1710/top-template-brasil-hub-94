@@ -24,6 +24,9 @@ import Page404 from "./pages/Page-404";
 import { AppProvider } from "./contexts/AppContext";
 import { CodeProvider } from "./contexts/CodeContext";
 import { AuthProvider } from "./hooks/useAuth";
+import { AuthProvider as SupabaseAuthProvider } from "./contexts/SupabaseAuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Auth from "./pages/Auth";
 
 // Páginas administrativas
 import AdminLayout from "./components/admin/AdminLayout";
@@ -41,63 +44,68 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <AppProvider>
-          <AuthProvider>
-            <CodeProvider>
-              <Toaster />
-              <Sonner />
-              <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/forgot-password" element={<ForgotPassword />} />
-              <Route path="/funnel" element={<Funnel />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/terms" element={<Terms />} />
-              
-              {/* Rotas da plataforma */}
-              <Route path="/plataform/*" element={
-                <Layout>
+        <SupabaseAuthProvider>
+          <AppProvider>
+            <AuthProvider>
+              <CodeProvider>
+                <Toaster />
+                <Sonner />
+                <BrowserRouter>
                   <Routes>
-                    <Route path="/" element={<Plataform />} />
-                    <Route path="/support" element={<Support />} />
-                    <Route path="/search" element={<Search />} />
-                    <Route path="/favorites" element={<Favorites />} />
-                    <Route path="/saved" element={<Saved />} />
-                    <Route path="/cart" element={<Cart />} />
-                    <Route path="/profile" element={<Profile />} />
+                    <Route path="/" element={<Home />} />
+                    <Route path="/auth" element={<Auth />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/signup" element={<Signup />} />
+                    <Route path="/forgot-password" element={<ForgotPassword />} />
+                    <Route path="/funnel" element={<Funnel />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="/terms" element={<Terms />} />
+                    
+                    {/* Rotas da plataforma protegidas */}
+                    <Route path="/plataform/*" element={
+                      <ProtectedRoute>
+                        <Layout>
+                          <Routes>
+                            <Route path="/" element={<Plataform />} />
+                            <Route path="/support" element={<Support />} />
+                            <Route path="/search" element={<Search />} />
+                            <Route path="/favorites" element={<Favorites />} />
+                            <Route path="/saved" element={<Saved />} />
+                            <Route path="/cart" element={<Cart />} />
+                            <Route path="/profile" element={<Profile />} />
+                          </Routes>
+                        </Layout>
+                      </ProtectedRoute>
+                    } />
+                    
+                    {/* Rotas administrativas */}
+                    <Route path="/admin/login" element={
+                      <AdminProtectedRoute>
+                        <AdminLogin />
+                      </AdminProtectedRoute>
+                    } />
+                    
+                    <Route path="/admin/*" element={
+                      <AdminProtectedRoute>
+                        <AdminLayout />
+                      </AdminProtectedRoute>
+                    }>
+                      <Route path="" element={<AdminPage />} />
+                      <Route path="dashboard" element={<AdminDashboard />} />
+                      <Route path="users" element={<AdminUsers />} />
+                      <Route path="products" element={<AdminProducts />} />
+                      <Route path="orders" element={<AdminOrders />} />
+                    </Route>
+                    
+                    {/* Rota catch-all para páginas não encontradas */}
+                    <Route path="*" element={<Page404 />} />
                   </Routes>
-                </Layout>
-              } />
-              
-              {/* Rotas administrativas */}
-              <Route path="/admin/login" element={
-                <AdminProtectedRoute>
-                  <AdminLogin />
-                </AdminProtectedRoute>
-              } />
-              
-              <Route path="/admin/*" element={
-                <AdminProtectedRoute>
-                  <AdminLayout />
-                </AdminProtectedRoute>
-              }>
-                <Route path="" element={<AdminPage />} />
-                <Route path="dashboard" element={<AdminDashboard />} />
-                <Route path="users" element={<AdminUsers />} />
-                <Route path="products" element={<AdminProducts />} />
-                <Route path="orders" element={<AdminOrders />} />
-              </Route>
-              
-              {/* Rota catch-all para páginas não encontradas */}
-              <Route path="*" element={<Page404 />} />
-            </Routes>
-          </BrowserRouter>
-            </CodeProvider>
-          </AuthProvider>
-        </AppProvider>
+                </BrowserRouter>
+              </CodeProvider>
+            </AuthProvider>
+          </AppProvider>
+        </SupabaseAuthProvider>
       </TooltipProvider>
     </QueryClientProvider>
   );
