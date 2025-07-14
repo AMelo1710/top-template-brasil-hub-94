@@ -1,3 +1,5 @@
+import { saveToLocalStorage, loadFromLocalStorage, STORAGE_KEYS } from '../utils/localStorage';
+
 export interface User {
   id: string;
   email: string;
@@ -11,8 +13,7 @@ export interface User {
   isActive: boolean;
 }
 
-// Banco de dados simulado de usuários
-export const users: User[] = [
+const defaultUsers: User[] = [
   {
     id: '1',
     email: 'admin@toptemplates.com',
@@ -36,6 +37,25 @@ export const users: User[] = [
     isActive: true
   }
 ];
+
+// Função para carregar usuários do localStorage
+const loadUsers = (): User[] => {
+  const users = loadFromLocalStorage(STORAGE_KEYS.USERS, defaultUsers);
+  return users.map(user => ({
+    ...user,
+    createdAt: new Date(user.createdAt),
+    updatedAt: new Date(user.updatedAt),
+    lastLogin: user.lastLogin ? new Date(user.lastLogin) : undefined
+  }));
+};
+
+// Função para salvar usuários no localStorage
+const saveUsers = (users: User[]): void => {
+  saveToLocalStorage(STORAGE_KEYS.USERS, users);
+};
+
+// Carregar usuários do localStorage
+export const users = loadUsers();
 
 // Função para verificar se um email já existe
 export const checkEmailExists = (email: string): boolean => {
@@ -68,6 +88,7 @@ export const addUser = (userData: Omit<User, 'id' | 'createdAt' | 'updatedAt' | 
   };
   
   users.push(newUser);
+  saveUsers(users);
   return newUser;
 };
 
@@ -85,6 +106,7 @@ export const updateUser = (id: string, updates: Partial<User>): User | null => {
     updatedAt: new Date()
   };
   
+  saveUsers(users);
   return users[userIndex];
 };
 
@@ -93,6 +115,7 @@ export const updateLastLogin = (id: string): void => {
   const user = findUserById(id);
   if (user) {
     user.lastLogin = new Date();
+    saveUsers(users);
   }
 };
 
@@ -115,6 +138,7 @@ export const resetPassword = (email: string, newPassword: string): boolean => {
   if (user) {
     user.password = newPassword;
     user.updatedAt = new Date();
+    saveUsers(users);
     return true;
   }
   
