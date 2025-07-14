@@ -9,22 +9,23 @@ import { useToast } from '@/hooks/use-toast';
 import { useNavigate } from 'react-router-dom';
 import { getAllProducts, validateProductCode, useProductCode } from '@/data/products';
 import { useCodeContext } from '@/contexts/CodeContext';
+import PaymentModal from '@/components/Payment/PaymentModal';
 
 const Cart = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const { setHasValidNoAdsCode, setHasValidPremiumCode, setHasValidCourseCode } = useCodeContext();
   const [showRedeemModal, setShowRedeemModal] = useState(false);
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<any>(null);
   const [redeemCode, setRedeemCode] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
   const cartProducts = getAllProducts();
 
-  const handlePurchase = (productTitle: string) => {
-    toast({
-      title: "Recurso em desenvolvimento",
-      description: `A compra de "${productTitle}" será implementada em breve.`,
-    });
+  const handlePurchase = (product: any) => {
+    setSelectedProduct(product);
+    setShowPaymentModal(true);
   };
 
   const handleRedeemCode = () => {
@@ -164,7 +165,7 @@ const Cart = () => {
 
                 <Button 
                   className="w-full"
-                  onClick={() => handlePurchase(product.title)}
+                  onClick={() => handlePurchase(product)}
                 >
                   Comprar
                 </Button>
@@ -248,6 +249,14 @@ const Cart = () => {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      {selectedProduct && (
+        <PaymentModal
+          open={showPaymentModal}
+          onOpenChange={setShowPaymentModal}
+          product={selectedProduct}
+        />
+      )}
     </div>
   );
 };
