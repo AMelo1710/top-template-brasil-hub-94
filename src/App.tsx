@@ -25,6 +25,16 @@ import { AppProvider } from "./contexts/AppContext";
 import { CodeProvider } from "./contexts/CodeContext";
 import { AuthProvider } from "./hooks/useAuth";
 
+// Páginas administrativas
+import AdminLayout from "./components/admin/AdminLayout";
+import AdminProtectedRoute from "./components/admin/AdminProtectedRoute";
+import AdminLogin from "./pages/admin/AdminLogin";
+import AdminPage from "./pages/admin/AdminPage";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminUsers from "./pages/admin/AdminUsers";
+import AdminProducts from "./pages/admin/AdminProducts";
+import AdminOrders from "./pages/admin/AdminOrders";
+
 const queryClient = new QueryClient();
 
 const App = () => {
@@ -46,6 +56,8 @@ const App = () => {
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/terms" element={<Terms />} />
+              
+              {/* Rotas da plataforma */}
               <Route path="/plataform/*" element={
                 <Layout>
                   <Routes>
@@ -59,6 +71,26 @@ const App = () => {
                   </Routes>
                 </Layout>
               } />
+              
+              {/* Rotas administrativas */}
+              <Route path="/admin/login" element={
+                <AdminProtectedRoute>
+                  <AdminLogin />
+                </AdminProtectedRoute>
+              } />
+              
+              <Route path="/admin/*" element={
+                <AdminProtectedRoute>
+                  <AdminLayout />
+                </AdminProtectedRoute>
+              }>
+                <Route path="" element={<AdminPage />} />
+                <Route path="dashboard" element={<AdminDashboard />} />
+                <Route path="users" element={<AdminUsers />} />
+                <Route path="products" element={<AdminProducts />} />
+                <Route path="orders" element={<AdminOrders />} />
+              </Route>
+              
               {/* Rota catch-all para páginas não encontradas */}
               <Route path="*" element={<Page404 />} />
             </Routes>
