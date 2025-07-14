@@ -1,8 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
-import { templates, categories, toolFilters } from '@/data/templates';
 import { useApp } from '@/contexts/AppContext';
 import { renderCategoryTag, getPlatformBadge, renderCategoryButton, renderToolButton } from '@/utils/templateUtils';
-import { getValidTemplateIds } from '@/data/templates';
 
 export default function useSearch() {
   const { addToFavorites, removeFromFavorites, addToSaved, removeFromSaved, isFavorite, isSaved } = useApp();
@@ -13,10 +11,7 @@ export default function useSearch() {
   const [selectedTool, setSelectedTool] = useState('Todos');
 
   // Filtrar templates válidos primeiro
-  const validTemplates = useMemo(() => {
-    const validIds = getValidTemplateIds();
-    return templates.filter(template => validIds.includes(template.id));
-  }, []);
+  const validTemplates: any[] = [];
 
   useEffect(() => {
     let results = validTemplates;
@@ -24,11 +19,11 @@ export default function useSearch() {
       results = results.filter(template => 
         template.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         template.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        template.categories.some(cat => cat.toLowerCase().includes(searchTerm.toLowerCase()))
+        template.categories.some((cat: string) => cat.toLowerCase().includes(searchTerm.toLowerCase()))
       );
     }
     if (selectedCategory && selectedCategory !== 'Todos') {
-      results = results.filter(template => template.categories.some(cat => cat === selectedCategory));
+      results = results.filter(template => template.categories.some((cat: string) => cat === selectedCategory));
     }
     if (selectedTool && selectedTool !== 'Todos') {
       results = results.filter(template => template.tool === selectedTool);
@@ -66,8 +61,8 @@ export default function useSearch() {
     setSelectedCategory,
     selectedTool,
     setSelectedTool,
-    categories: ['Todos', ...categories],
-    toolFilters,
+    categories: ['Todos'],
+    toolFilters: [],
     renderCategoryButton,
     renderToolButton,
     handleFavoriteToggle,

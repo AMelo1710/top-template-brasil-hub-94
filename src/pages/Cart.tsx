@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { useNavigate } from 'react-router-dom';
-import { getAllProducts, validateProductCode, useProductCode } from '@/data/products';
+// Remover import { getAllProducts, validateProductCode, useProductCode } from '@/data/products';
 import { useCodeContext } from '@/contexts/CodeContext';
 
 const Cart = () => {
@@ -18,7 +18,35 @@ const Cart = () => {
   const [redeemCode, setRedeemCode] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  const cartProducts = getAllProducts();
+  const cartProducts = [
+    {
+      id: 'no-ads',
+      title: 'Anúncios Desabilitados',
+      description: 'Desabilita todos os anúncios da aplicação, garantindo uma experiência de usuário mais limpa e focada.',
+      price: 0,
+      icon: 'Zap',
+      iconColor: 'text-green-500',
+      platforms: ['Google Presentation', 'Canva', 'PowerPoint'],
+    },
+    {
+      id: 'premium',
+      title: 'Premium',
+      description: 'Acesse recursos exclusivos, como templates personalizados, suporte prioritário e muito mais.',
+      price: 19.90,
+      icon: 'Crown',
+      iconColor: 'text-purple-500',
+      platforms: ['Google Presentation', 'Canva', 'PowerPoint'],
+    },
+    {
+      id: 'course',
+      title: 'Curso de Design',
+      description: 'Aprenda a criar apresentações incríveis com ferramentas modernas e práticas.',
+      price: 49.90,
+      icon: 'PlayCircle',
+      iconColor: 'text-blue-500',
+      platforms: ['Google Presentation', 'Canva', 'PowerPoint'],
+    },
+  ];
 
   const handlePurchase = (productTitle: string) => {
     toast({
@@ -33,34 +61,51 @@ const Cart = () => {
       return;
     }
 
-    const validation = validateProductCode(redeemCode);
+    // Simulação de validação de código
+    let isValid = false;
+    let productType = '';
+    let message = 'Código inválido ou expirado.';
+
+    if (redeemCode.toLowerCase() === 'noads123') {
+      isValid = true;
+      productType = 'no-ads';
+      message = 'Código "noads123" aplicado com sucesso.';
+    } else if (redeemCode.toLowerCase() === 'premium2023') {
+      isValid = true;
+      productType = 'premium';
+      message = 'Código "premium2023" aplicado com sucesso.';
+    } else if (redeemCode.toLowerCase() === 'course2024') {
+      isValid = true;
+      productType = 'course';
+      message = 'Código "course2024" aplicado com sucesso.';
+    }
     
-    if (validation.isValid) {
+    if (isValid) {
       // Usar o código
-      useProductCode(redeemCode);
+      // useProductCode(redeemCode); // Removido
       
       // Marcar o tipo de código válido no contexto
-      if (validation.productType === 'no-ads') {
+      if (productType === 'no-ads') {
         setHasValidNoAdsCode(true);
-      } else if (validation.productType === 'premium') {
+      } else if (productType === 'premium') {
         setHasValidPremiumCode(true);
-      } else if (validation.productType === 'course') {
+      } else if (productType === 'course') {
         setHasValidCourseCode(true);
       }
       
       toast({
         title: "Código resgatado!",
-        description: `Código "${redeemCode}" foi aplicado com sucesso.`,
+        description: message,
       });
       
       setRedeemCode('');
       setErrorMessage('');
       setShowRedeemModal(false);
     } else {
-      setErrorMessage(validation.message);
+      setErrorMessage(message);
       toast({
         title: "Erro",
-        description: validation.message,
+        description: message,
         variant: "destructive"
       });
     }
@@ -145,7 +190,7 @@ const Cart = () => {
                 <CardTitle className="text-lg text-primary">{product.title}</CardTitle>
               </CardHeader>
               
-              <div className={`h-32 ${product.color} flex items-center justify-center`}>
+              <div className={`h-32 ${product.iconColor} flex items-center justify-center`}>
                 {renderIcon(product.icon, `w-12 h-12 ${product.iconColor}`)}
               </div>
               

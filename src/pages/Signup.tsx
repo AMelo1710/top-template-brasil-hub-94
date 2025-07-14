@@ -120,8 +120,7 @@ const Signup = () => {
       username: userDetailsForm.username,
       createdAt: new Date().toISOString()
     };
-    
-    localStorage.setItem('userData', JSON.stringify(userData));
+    // localStorage.setItem('userData', JSON.stringify(userData));
 
     showCustomNotification(`Conta criada com sucesso, ${userDetailsForm.fullName}!`, 'success');
     setTimeout(() => {

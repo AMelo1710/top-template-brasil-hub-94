@@ -40,12 +40,7 @@ const Login = () => {
       return;
     }
     
-    const userData = localStorage.getItem('userData');
     let userName = 'Usuário';
-    if (userData) {
-      const user = JSON.parse(userData);
-      userName = user.fullName;
-    }
     
     showCustomNotification(`Bem-vindo de volta, ${userName}!`, 'success');
     setTimeout(() => {

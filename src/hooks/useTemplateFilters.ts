@@ -1,10 +1,9 @@
 import { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { templates, categories, toolFilters } from '@/data/templates';
 import { useApp } from '@/contexts/AppContext';
 import { useToast } from '@/hooks/use-toast';
 import { renderCategoryTag, getPlatformBadge, renderCategoryButton, renderToolButton } from '@/utils/templateUtils';
-import { getValidTemplateIds } from '@/data/templates';
+import { templates, categories, toolFilters, getValidTemplateIds } from '@/data/templates';
 
 export default function useTemplateFilters() {
   const navigate = useNavigate();
@@ -34,22 +33,24 @@ export default function useTemplateFilters() {
     }
   };
 
-  // Filtrar templates válidos primeiro
+  // Restaurar lógica de filtro real usando os dados importados
   const validTemplates = useMemo(() => {
     const validIds = getValidTemplateIds();
     return templates.filter(template => validIds.includes(template.id));
   }, []);
 
-  const filteredTemplates = validTemplates.filter(template => {
-    const matchTool = toolFilter === 'Todos' || template.tool === toolFilter;
-    let matchCategory = true;
-    if (activeCategory === '🔥Em alta🔥') {
-      matchCategory = template.categories.some(cat => cat.trim().toLowerCase() === '🔥em alta🔥'.toLowerCase());
-    } else if (activeCategory !== 'Todos') {
-      matchCategory = template.categories.some(cat => cat.trim().toLowerCase() === activeCategory.trim().toLowerCase());
-    }
-    return matchTool && matchCategory;
-  });
+  const filteredTemplates = useMemo(() => {
+    return validTemplates.filter(template => {
+      const matchTool = toolFilter === 'Todos' || template.tool === toolFilter;
+      let matchCategory = true;
+      if (activeCategory === '🔥Em alta🔥') {
+        matchCategory = template.categories.some(cat => cat.trim().toLowerCase() === '🔥em alta🔥'.toLowerCase());
+      } else if (activeCategory !== 'Todos') {
+        matchCategory = template.categories.some(cat => cat.trim().toLowerCase() === activeCategory.trim().toLowerCase());
+      }
+      return matchTool && matchCategory;
+    });
+  }, [validTemplates, toolFilter, activeCategory]);
 
   const handleFavoriteToggle = (template: any) => {
     if (isFavorite(template.id)) {
@@ -106,12 +107,12 @@ export default function useTemplateFilters() {
     setActiveCategory,
     showProModal,
     setShowProModal,
-    toolFilters,
     toolFilter,
     setToolFilter,
     getVisibleCategories,
     renderCategoryButton,
     renderToolButton,
+    toolFilters,
     filteredTemplates,
     handleFavoriteToggle,
     handleSavedToggle,

@@ -30,13 +30,7 @@ export const useHomeState = () => {
 
   // Check for returning users and show welcome notification
   useEffect(() => {
-    const userData = localStorage.getItem('userData');
-    if (userData && !showLogin) {
-      const user = JSON.parse(userData);
-      setTimeout(() => {
-        showCustomNotification(`Bem-vindo de volta, ${user.fullName}!`, 'success');
-      }, 1000);
-    }
+    // Removido: uso de localStorage para userData
   }, [showLogin]);
 
   // Utility functions
@@ -67,12 +61,8 @@ export const useHomeState = () => {
     }
     
     // Simulate getting user data
-    const userData = localStorage.getItem('userData');
-    let userName = 'Usuário';
-    if (userData) {
-      const user = JSON.parse(userData);
-      userName = user.fullName;
-    }
+    // Removido: uso de localStorage para userData
+    const userName = 'Usuário'; // Placeholder
     
     showCustomNotification(`Bem-vindo de volta, ${userName}!`, 'success');
     setTimeout(() => {

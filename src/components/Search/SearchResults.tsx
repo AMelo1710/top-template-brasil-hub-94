@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import TemplateCard from '@/components/TemplateCard';
 import { Search as SearchIcon } from 'lucide-react';
-import { getValidTemplateIds, getTemplateById } from '@/data/templates';
+// Remover import { getValidTemplateIds, getTemplateById } from '@/data/templates';
 
 interface SearchResultsProps {
   results: any[];
@@ -26,13 +26,12 @@ export default function SearchResults({
 }: SearchResultsProps) {
   // Filtrar apenas os resultados que têm templates válidos
   const validResults = useMemo(() => {
-    const validIds = getValidTemplateIds();
+    // Remover lógica de filtragem por IDs válidos
     return results
-      .filter(result => validIds.includes(result.id))
       .map(result => {
         // Buscar o template completo do arquivo templates.ts
-        const template = getTemplateById(result.id);
-        return template || result; // Fallback para o item original se não encontrar
+        // Remover lógica de busca por ID local
+        return result; // Fallback para o item original
       });
   }, [results]);
 
