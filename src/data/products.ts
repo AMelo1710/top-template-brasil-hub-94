@@ -1,5 +1,3 @@
-import { saveToLocalStorage, loadFromLocalStorage, STORAGE_KEYS } from '../utils/localStorage';
-
 export interface ProductCode {
   code: string;
   productType: 'premium' | 'no-ads' | 'course';
@@ -20,8 +18,8 @@ export interface Product {
   platforms: string[];
 }
 
-// Produtos padrão
-const defaultProducts: Product[] = [
+// Produtos disponíveis
+export const products: Product[] = [
   {
     id: 'premium',
     title: 'Acesso Premium',
@@ -54,8 +52,8 @@ const defaultProducts: Product[] = [
   }
 ];
 
-// Códigos padrão
-const defaultProductCodes: ProductCode[] = [
+// Códigos de resgate (simulando um banco de dados)
+export const productCodes: ProductCode[] = [
   {
     code: 'PREMIUM2025',
     productType: 'premium',
@@ -102,30 +100,6 @@ const defaultProductCodes: ProductCode[] = [
   },
 ];
 
-// Função para carregar produtos do localStorage
-const loadProducts = (): Product[] => {
-  return loadFromLocalStorage(STORAGE_KEYS.PRODUCTS, defaultProducts);
-};
-
-// Função para carregar códigos do localStorage
-const loadProductCodes = (): ProductCode[] => {
-  const codes = loadFromLocalStorage(STORAGE_KEYS.PRODUCT_CODES, defaultProductCodes);
-  return codes.map(code => ({
-    ...code,
-    validity: new Date(code.validity),
-    usedAt: code.usedAt ? new Date(code.usedAt) : undefined
-  }));
-};
-
-// Função para salvar códigos no localStorage
-const saveProductCodes = (codes: ProductCode[]): void => {
-  saveToLocalStorage(STORAGE_KEYS.PRODUCT_CODES, codes);
-};
-
-// Carregar dados do localStorage
-export const products = loadProducts();
-export const productCodes = loadProductCodes();
-
 // Função para validar código de resgate
 export const validateProductCode = (code: string): { isValid: boolean; message: string; productType?: string } => {
   const productCode = productCodes.find(pc => pc.code === code.toUpperCase());
@@ -170,8 +144,7 @@ export const useProductCode = (code: string, userId?: string): boolean => {
   productCode.usageStatus = 'invalid';
   productCode.usedAt = new Date();
   productCode.usedBy = userId;
-  
-  saveProductCodes(productCodes);
+
   return true;
 };
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
 
 interface HeroSectionProps {
   onLoginClick: () => void;
@@ -48,13 +47,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLoginClick }) => {
             Explore um mundo de oportunidades e recursos para ajudar você a alcançar seus objetivos.
           </h2>
         </div>
-        <Link to="/auth">
-          <Button 
-            className="relative z-10 bg-cyan-700 text-sky-100 hover:bg-sky-100 hover:text-secondary font-bold px-8 py-3 rounded-full transition-all duration-250 animate-[pulse_1.5s_infinite] hover:animate-none hover:scale-105 hover:shadow-lg"
-          >
-            Acessar plataforma
-          </Button>
-        </Link>
+        <Button 
+          onClick={onLoginClick}
+          className="relative z-10 bg-cyan-700 text-sky-100 hover:bg-sky-100 hover:text-secondary font-bold px-8 py-3 rounded-full transition-all duration-250 animate-[pulse_1.5s_infinite] hover:animate-none hover:scale-105 hover:shadow-lg"
+        >
+          Acessar plataforma
+        </Button>
       </div>
     </div>
   );

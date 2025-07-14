@@ -1,8 +1,6 @@
-import { saveToLocalStorage, loadFromLocalStorage, STORAGE_KEYS } from '../utils/localStorage';
-
 // src/data/templates.ts
 
-const defaultTemplates = [
+export const templates = [
   {
     id: 'template-moderno',
     title: 'Template Moderno',
@@ -100,19 +98,6 @@ const defaultTemplates = [
     noAdsLink: 'https://www.canva.com/design/DAF567890/view?premium=true'
   }
 ];
-
-// Função para carregar templates do localStorage
-const loadTemplates = () => {
-  return loadFromLocalStorage(STORAGE_KEYS.TEMPLATES, defaultTemplates);
-};
-
-// Função para salvar templates no localStorage
-const saveTemplates = (templates: any[]) => {
-  saveToLocalStorage(STORAGE_KEYS.TEMPLATES, templates);
-};
-
-// Carregar templates do localStorage
-export const templates = loadTemplates();
 
 // Função para obter os IDs válidos dos templates
 export const getValidTemplateIds = () => {

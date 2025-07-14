@@ -1,5 +1,3 @@
-import { saveToLocalStorage, loadFromLocalStorage, STORAGE_KEYS } from '../utils/localStorage';
-
 export interface Session {
   id: string;
   userId: string;
@@ -9,23 +7,8 @@ export interface Session {
   isActive: boolean;
 }
 
-// Função para carregar sessões do localStorage
-const loadSessions = (): Session[] => {
-  const sessions = loadFromLocalStorage(STORAGE_KEYS.SESSIONS, []);
-  return sessions.map(session => ({
-    ...session,
-    createdAt: new Date(session.createdAt),
-    expiresAt: new Date(session.expiresAt)
-  }));
-};
-
-// Função para salvar sessões no localStorage
-const saveSessions = (sessions: Session[]): void => {
-  saveToLocalStorage(STORAGE_KEYS.SESSIONS, sessions);
-};
-
-// Carregar sessões do localStorage
-export const sessions = loadSessions();
+// Banco de dados simulado de sessões
+export const sessions: Session[] = [];
 
 // Função para gerar token único
 export const generateToken = (): string => {
@@ -44,7 +27,6 @@ export const createSession = (userId: string): Session => {
   };
   
   sessions.push(session);
-  saveSessions(sessions);
   return session;
 };
 
@@ -74,7 +56,6 @@ export const endSession = (token: string): boolean => {
   
   if (session) {
     session.isActive = false;
-    saveSessions(sessions);
     return true;
   }
   
@@ -84,16 +65,11 @@ export const endSession = (token: string): boolean => {
 // Função para limpar sessões expiradas
 export const cleanupExpiredSessions = (): void => {
   const now = new Date();
-  let hasChanges = false;
   sessions.forEach(session => {
-    if (session.expiresAt < now && session.isActive) {
+    if (session.expiresAt < now) {
       session.isActive = false;
-      hasChanges = true;
     }
   });
-  if (hasChanges) {
-    saveSessions(sessions);
-  }
 };
 
 // Função para obter sessão ativa do usuário
